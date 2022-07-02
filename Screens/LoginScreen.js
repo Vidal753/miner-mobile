@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import { colors } from '../Constant/Colors';
 
 export default function () {
-  const color = { ...colors };
-  const styles = makeStyle(color);
+  const styles = makeStyle();
   return (
     <View>
       <Text>Hello</Text>
@@ -12,7 +10,7 @@ export default function () {
   );
 }
 
-const makeStyle = (color) => {
+const makeStyle = () => {
   return StyleSheet.create({
     container: {},
   });

@@ -1,19 +1,22 @@
 import React from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import { colors } from '../Constant/Colors';
+import { colors } from '../Constant/colors';
 
 export default function () {
   const color = { ...colors };
   const styles = makeStyle(color);
   return (
-    <View>
+    <ScrollView style={styles.container}>
       <Text>InformationScreen</Text>
-    </View>
+    </ScrollView>
   );
 }
 
 const makeStyle = (color) => {
   return StyleSheet.create({
-    container: {},
+    container: {
+      backgroundColor: color.black,
+      height: '100%',
+    },
   });
 };
