@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { FontAwesome } from '@expo/vector-icons';
 import { colors } from '../Constant/colors';
+import StarRating from './StarRating';
 
 export default function ({ status = {} }) {
   const color = { ...colors };
@@ -31,8 +32,9 @@ export default function ({ status = {} }) {
           </View>
           <View style={styles.principalInformation}>
             <Text style={styles.primaryText}>{status.name}</Text>
-            <Text style={styles.primaryText}>{`C$ ${status.price} H`}</Text>
+            <StarRating star={status.stars} />
           </View>
+          <Text style={styles.primaryText}>{`C$ ${status.price} H`}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -42,25 +44,24 @@ export default function ({ status = {} }) {
 const makeStyle = (color, status) => {
   return StyleSheet.create({
     container: {
-      height: 230,
+      height: 250,
       width: wp(90),
       borderRadius: 10,
       padding: 10,
       backgroundColor: status.active ? color.background : color.accent,
     },
     image: {
-      height: '75%',
+      height: '70%',
       alignItems: 'center',
       justifyContent: 'center',
     },
     description: {
-      height: '25%',
+      height: '30%',
     },
     principalInformation: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: 10,
     },
     stateActivity: {
       flexDirection: 'row',

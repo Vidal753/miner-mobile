@@ -5,13 +5,12 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
-import { getHeaderTitle } from '@react-navigation/elements';
 import TextInput from './TextInput';
 import { colors } from '../Constant/colors';
 
 const Header = ({ navigation, options, back }) => {
   //const title = getHeaderTitle(options, route.name);
-  const title = getHeaderTitle(options);
+  //const title = getHeaderTitle(options);
   const color = { ...colors };
   let styles = makeStyles(color);
 
@@ -37,7 +36,7 @@ const Header = ({ navigation, options, back }) => {
 function makeStyles(color) {
   return StyleSheet.create({
     container: {
-      backgroundColor: color.black,
+      backgroundColor: color.primary,
       height: hp(11.4),
       width: wp(100),
       display: 'flex',

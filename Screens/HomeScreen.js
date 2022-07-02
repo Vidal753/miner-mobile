@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import CardItem from '../Components/CardItem';
 import { colors } from '../Constant/colors';
 
@@ -14,6 +14,7 @@ export default function () {
       time: '10:00',
       name: 'Rastras Larry Siles',
       price: '300',
+      stars: 5,
     },
     {
       active: true,
@@ -21,6 +22,7 @@ export default function () {
       time: '',
       name: 'Rastras Larry Siles',
       price: '300',
+      stars: 3,
     },
     {
       active: false,
@@ -28,6 +30,7 @@ export default function () {
       time: '10:00',
       name: 'Rastras Larry Siles',
       price: '300',
+      stars: 4,
     },
     {
       active: true,
@@ -35,6 +38,7 @@ export default function () {
       time: '',
       name: 'Rastras Larry Siles',
       price: '300',
+      stars: 1,
     },
   ];
 
@@ -60,7 +64,7 @@ export default function () {
 const makeStyle = (color) => {
   return StyleSheet.create({
     container: {
-      backgroundColor: color.medium_black,
+      backgroundColor: color.black,
       height: '100%',
     },
   });
