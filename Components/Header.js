@@ -4,8 +4,9 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { getHeaderTitle } from '@react-navigation/elements';
+import TextInput from './TextInput';
 import { colors } from '../Constant/colors';
 
 const Header = ({ navigation, options, back }) => {
@@ -22,8 +23,12 @@ const Header = ({ navigation, options, back }) => {
             <FontAwesome name="chevron-left" size={hp(3)} color={color.primary} />
           </TouchableOpacity>
         )}
-        <Text style={{ fontSize: 18, color: color.primary }}>{title}</Text>
+        <Text style={styles.primaryText}>MiRastra</Text>
         <View style={styles.button} />
+        <TextInput error={''} info={''} />
+        <TouchableOpacity>
+          <AntDesign name="search1" size={30} color={color.background} />
+        </TouchableOpacity>
       </View>
     </Fragment>
   );
@@ -32,7 +37,7 @@ const Header = ({ navigation, options, back }) => {
 function makeStyles(color) {
   return StyleSheet.create({
     container: {
-      backgroundColor: color.blue,
+      backgroundColor: color.black,
       height: hp(11.4),
       width: wp(100),
       display: 'flex',
@@ -56,6 +61,10 @@ function makeStyles(color) {
       minHeight: 14,
       flexDirection: 'row',
       alignItems: 'center',
+    },
+    primaryText: {
+      color: color.background,
+      fontSize: 22,
     },
   });
 }

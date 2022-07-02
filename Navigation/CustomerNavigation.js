@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../Screens/HomeScreen';
 import SettingsScreen from '../Screens/SettingsScreen';
@@ -35,12 +35,13 @@ export default function () {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
                 <Entypo name="home" size={24} color="black" />
               ) : (
                 <AntDesign name="home" size={24} color="black" />
               )}
-              <Text>HOME</Text>
+              <Text>INICIO</Text>
             </View>
           ),
         }}
@@ -51,12 +52,13 @@ export default function () {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
                 <Ionicons name="settings" size={24} color="black" />
               ) : (
                 <Ionicons name="settings-outline" size={24} color="black" />
               )}
-              <Text>SETTINGS</Text>
+              <Text>AJUSTES</Text>
             </View>
           ),
         }}
