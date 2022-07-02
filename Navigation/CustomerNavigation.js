@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons';
-import HomeScreen from '../Screens/HomeScreen';
+import ItemNavigation from './ItemNavigation';
 import SettingsScreen from '../Screens/SettingsScreen';
 import Header from '../Components/Header';
 import { colors } from '../Constant/colors';
@@ -30,9 +30,10 @@ export default function () {
         ],
       }}>
       <Tab.Screen
-        name={'Home'}
-        component={HomeScreen}
+        name={'ItemNavigation'}
+        component={ItemNavigation}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}

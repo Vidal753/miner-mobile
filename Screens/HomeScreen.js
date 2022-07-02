@@ -4,7 +4,7 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 import CardItem from '../Components/CardItem';
 import { colors } from '../Constant/colors';
 
-export default function () {
+export default function ({ navigation }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const status = [
@@ -51,7 +51,7 @@ export default function () {
       <StatusBar style={'light'} />
 
       {active.map((state) => (
-        <CardItem status={state} />
+        <CardItem status={state} onPress={() => navigation.navigate('Item')} />
       ))}
       {inactive.map((state) => (
         <CardItem status={state} />

@@ -5,29 +5,36 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { getHeaderTitle } from '@react-navigation/elements';
 import TextInput from './TextInput';
 import { colors } from '../Constant/colors';
 
 const Header = ({ navigation, options, back }) => {
   //const title = getHeaderTitle(options, route.name);
-  //const title = getHeaderTitle(options);
+  const title = getHeaderTitle(options);
   const color = { ...colors };
   let styles = makeStyles(color);
 
   return (
     <Fragment>
       <View style={[styles.container, options.headerStyle]}>
-        {back && (
-          <TouchableOpacity style={styles.button} onPress={navigation.goBack}>
-            <FontAwesome name="chevron-left" size={hp(3)} color={color.primary} />
-          </TouchableOpacity>
+        {back ? (
+          <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+            <TouchableOpacity style={styles.button} onPress={navigation.goBack}>
+              <FontAwesome name="chevron-left" size={hp(3)} color={color.background} />
+            </TouchableOpacity>
+            <Text style={styles.primaryText}>{title}</Text>
+          </View>
+        ) : (
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+            <Text style={styles.primaryText}>MiRastra</Text>
+            <View style={styles.button} />
+            <TextInput error={''} info={''} />
+            <TouchableOpacity>
+              <AntDesign name="search1" size={30} color={color.background} />
+            </TouchableOpacity>
+          </View>
         )}
-        <Text style={styles.primaryText}>MiRastra</Text>
-        <View style={styles.button} />
-        <TextInput error={''} info={''} />
-        <TouchableOpacity>
-          <AntDesign name="search1" size={30} color={color.background} />
-        </TouchableOpacity>
       </View>
     </Fragment>
   );
@@ -64,6 +71,7 @@ function makeStyles(color) {
     primaryText: {
       color: color.background,
       fontSize: 22,
+      textAlign: 'center',
     },
   });
 }

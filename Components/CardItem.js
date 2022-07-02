@@ -5,11 +5,11 @@ import { FontAwesome } from '@expo/vector-icons';
 import { colors } from '../Constant/colors';
 import StarRating from './StarRating';
 
-export default function ({ status = {} }) {
+export default function ({ status = {}, onPress }) {
   const color = { ...colors };
   const styles = makeStyle(color, status);
   return (
-    <TouchableOpacity style={{ alignItems: 'center', marginVertical: 10 }}>
+    <TouchableOpacity style={{ alignItems: 'center', marginVertical: 10 }} onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.image}>
           <Image
