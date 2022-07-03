@@ -93,7 +93,7 @@ export default function ({ navigation }) {
         {inactive.map((state, index) => (
           <CardItem key={index} status={state} />
         ))}
-        <View style={{ minHeight: 100 }} />
+        <View style={{ minHeight: 190 }} />
       </ScrollView>
     </View>
   );
