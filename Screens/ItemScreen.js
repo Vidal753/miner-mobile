@@ -7,6 +7,7 @@ import {
 import { colors } from '../Constant/colors';
 import StarRating from '../Components/StarRating';
 import StatusActivity from '../Components/StatusActivity';
+import Button from '../Components/Button';
 
 export default function () {
   const color = { ...colors };
@@ -41,6 +42,10 @@ export default function () {
       <Text style={styles.secondText}>{`Precio: C$${item.price} por hora.`}</Text>
       <Text style={styles.secondText}>{`Capacidad: ${item.amount}T`}</Text>
       <Text style={styles.secondText}>{item.description}</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Button title={'Reservar'} size={13} />
+        <Button title={'Llamar'} size={9} register />
+      </View>
     </View>
   );
 }

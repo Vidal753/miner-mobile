@@ -87,10 +87,22 @@ export default function ({ navigation }) {
         <StatusBar style={'light'} />
 
         {active.map((state, index) => (
-          <CardItem key={index} status={state} onPress={() => navigation.navigate('Item')} />
+          <CardItem
+            key={index}
+            status={state}
+            onPress={() => {
+              navigation.navigate('Item');
+            }}
+          />
         ))}
         {inactive.map((state, index) => (
-          <CardItem key={index} status={state} onPress={() => navigation.navigate('Item')} />
+          <CardItem
+            key={index}
+            status={state}
+            onPress={() => {
+              navigation.navigate('Item');
+            }}
+          />
         ))}
         <View style={{ minHeight: 190 }} />
       </ScrollView>
