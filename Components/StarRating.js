@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { View, TouchableWithoutFeedback, StyleSheet, Animated } from 'react-native';
+import { View, TouchableWithoutFeedback, Animated } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { colors } from '../Constant/colors';
 
 export default function ({ active = false, star = 1 }) {
   const [value, setValue] = useState(star);
-  const styles = makeStyle();
   const numStars = 5;
   let stars = [];
 
@@ -24,11 +23,7 @@ export default function ({ active = false, star = 1 }) {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <View style={{ flexDirection: 'row' }}>{stars}</View>
-    </View>
-  );
+  return <View style={{ flexDirection: 'row' }}>{stars}</View>;
 }
 
 const Star = ({ filled = false }) => {
@@ -42,14 +37,4 @@ const Star = ({ filled = false }) => {
       style={{ marginLeft: 2 }}
     />
   );
-};
-
-const makeStyle = () => {
-  return StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-    },
-  });
 };

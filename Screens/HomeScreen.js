@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, ScrollView, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import CardItem from '../Components/CardItem';
 import { colors } from '../Constant/colors';
 import TextInput from '../Components/TextInput';
-import Header from '../Components/Header';
 
 export default function ({ navigation }) {
   const color = { ...colors };
@@ -13,7 +12,7 @@ export default function ({ navigation }) {
   const status = [
     {
       active: false,
-      state: 'Inactivo',
+      state: 'Ocupado',
       time: '10:00',
       name: 'Larry Siles',
       price: '300',
@@ -21,7 +20,7 @@ export default function ({ navigation }) {
     },
     {
       active: true,
-      state: 'Activo',
+      state: 'Disponible',
       time: '',
       name: 'Selvin Altamirano',
       price: '300',
@@ -29,7 +28,7 @@ export default function ({ navigation }) {
     },
     {
       active: false,
-      state: 'Inactivo',
+      state: 'Ocupado',
       time: '10:00',
       name: 'Carlos Hernandez',
       price: '300',
@@ -37,7 +36,7 @@ export default function ({ navigation }) {
     },
     {
       active: true,
-      state: 'Activo',
+      state: 'Disponible',
       time: '',
       name: 'Abraham Ardila',
       price: '300',
@@ -91,7 +90,7 @@ export default function ({ navigation }) {
           <CardItem key={index} status={state} onPress={() => navigation.navigate('Item')} />
         ))}
         {inactive.map((state, index) => (
-          <CardItem key={index} status={state} />
+          <CardItem key={index} status={state} onPress={() => navigation.navigate('Item')} />
         ))}
         <View style={{ minHeight: 190 }} />
       </ScrollView>

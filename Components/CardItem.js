@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { FontAwesome } from '@expo/vector-icons';
 import { colors } from '../Constant/colors';
 import StarRating from './StarRating';
+import StatusActivity from './StatusActivity';
 
 export default function ({ status = {}, onPress }) {
   const color = { ...colors };
@@ -17,17 +17,7 @@ export default function ({ status = {}, onPress }) {
           style={styles.imageStyle}
         />
         <View style={{ paddingLeft: 10 }}>
-          <View style={styles.stateActivity}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <FontAwesome
-                name="circle"
-                size={15}
-                color={status.active ? color.green : color.red}
-              />
-              <Text style={{ paddingLeft: 7 }}>{status.state}</Text>
-            </View>
-          </View>
-          {status.active === false && <Text>{`Aproximadamente: ${status.time} M`}</Text>}
+          <StatusActivity status={status} />
           <Text style={styles.primaryText}>{status.name}</Text>
           <View style={styles.principalInformation}>
             <Text style={styles.secondText}>{`C$ ${status.price}/H`}</Text>
@@ -58,12 +48,6 @@ const makeStyle = (color, status) => {
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-    },
-    stateActivity: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingTop: 5,
     },
     primaryText: {
       color: color.black,
