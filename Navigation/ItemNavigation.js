@@ -12,7 +12,14 @@ export default function () {
       screenOptions={{
         header: (props) => <Header {...props} />,
       }}>
-      <Stack.Screen name={'Home'} component={HomeScreen} />
+      <Stack.Screen
+        name={'Home'}
+        component={HomeScreen}
+        options={{
+          title: 'Inicio',
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name={'Item'}
         component={ItemScreen}

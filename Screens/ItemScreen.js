@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import StarRating from '../Components/StarRating';
 import { colors } from '../Constant/colors';
 
 export default function () {

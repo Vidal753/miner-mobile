@@ -4,12 +4,11 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { getHeaderTitle } from '@react-navigation/elements';
-import TextInput from './TextInput';
 import { colors } from '../Constant/colors';
 
-const Header = ({ navigation, options, back }) => {
+const Header = ({ navigation, options, back, onChangeValue }) => {
   //const title = getHeaderTitle(options, route.name);
   const title = getHeaderTitle(options);
   const color = { ...colors };
@@ -19,22 +18,14 @@ const Header = ({ navigation, options, back }) => {
     <Fragment>
       <View style={[styles.container, options.headerStyle]}>
         {back ? (
-          <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-            <TouchableOpacity style={styles.button} onPress={navigation.goBack}>
-              <FontAwesome name="chevron-left" size={hp(3)} color={color.background} />
-            </TouchableOpacity>
-            <Text style={styles.primaryText}>{title}</Text>
-          </View>
+          <TouchableOpacity style={styles.button} onPress={navigation.goBack}>
+            <FontAwesome name="chevron-left" size={hp(3)} color={colors.background} />
+          </TouchableOpacity>
         ) : (
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-            <Text style={styles.primaryText}>MiRastra</Text>
-            <View style={styles.button} />
-            <TextInput error={''} info={''} />
-            <TouchableOpacity>
-              <AntDesign name="search1" size={30} color={color.background} />
-            </TouchableOpacity>
-          </View>
+          <View style={styles.button} />
         )}
+        <Text style={styles.primaryText}>{title}</Text>
+        <View style={styles.button} />
       </View>
     </Fragment>
   );
@@ -70,8 +61,7 @@ function makeStyles(color) {
     },
     primaryText: {
       color: color.background,
-      fontSize: 22,
-      textAlign: 'center',
+      fontSize: 26,
     },
   });
 }

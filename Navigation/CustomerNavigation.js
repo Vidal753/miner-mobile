@@ -51,13 +51,14 @@ export default function () {
         name={'Setting'}
         component={SettingsScreen}
         options={{
+          title: 'Settings',
           tabBarIcon: ({ focused }) => (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <Ionicons name="settings" size={24} color="black" />
+                <Ionicons name="settings" size={24} color={colors.black} />
               ) : (
-                <Ionicons name="settings-outline" size={24} color="black" />
+                <Ionicons name="settings-outline" size={24} color={colors.black} />
               )}
               <Text>AJUSTES</Text>
             </View>

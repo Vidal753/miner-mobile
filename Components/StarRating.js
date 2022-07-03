@@ -49,7 +49,7 @@ const makeStyle = () => {
     container: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'flex-end',
+      alignItems: 'flex-start',
     },
   });
 };
