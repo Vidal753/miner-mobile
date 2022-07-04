@@ -38,9 +38,9 @@ export default function () {
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <Entypo name="home" size={24} color="black" />
+                <Entypo name="home" size={24} color={colors.primary} />
               ) : (
-                <AntDesign name="home" size={24} color="black" />
+                <AntDesign name="home" size={24} color={colors.primary} />
               )}
               <Text>INICIO</Text>
             </View>
@@ -56,9 +56,9 @@ export default function () {
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <Ionicons name="settings" size={24} color={colors.black} />
+                <Ionicons name="settings" size={24} color={colors.primary} />
               ) : (
-                <Ionicons name="settings-outline" size={24} color={colors.black} />
+                <Ionicons name="settings-outline" size={24} color={colors.primary} />
               )}
               <Text>AJUSTES</Text>
             </View>

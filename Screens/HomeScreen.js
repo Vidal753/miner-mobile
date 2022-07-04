@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import CardItem from '../Components/CardItem';
 import { colors } from '../Constant/colors';
 import TextInput from '../Components/TextInput';
@@ -15,7 +15,7 @@ export default function ({ navigation }) {
       state: 'Ocupado',
       time: '10:00',
       name: 'Larry Siles',
-      price: '300',
+      price: '1500',
       stars: 5,
     },
     {
@@ -23,7 +23,7 @@ export default function ({ navigation }) {
       state: 'Disponible',
       time: '',
       name: 'Selvin Altamirano',
-      price: '300',
+      price: '1500',
       stars: 3,
     },
     {
@@ -31,7 +31,7 @@ export default function ({ navigation }) {
       state: 'Ocupado',
       time: '10:00',
       name: 'Carlos Hernandez',
-      price: '300',
+      price: '1500',
       stars: 4,
     },
     {
@@ -39,7 +39,7 @@ export default function ({ navigation }) {
       state: 'Disponible',
       time: '',
       name: 'Abraham Ardila',
-      price: '300',
+      price: '1400',
       stars: 1,
     },
   ];
@@ -65,7 +65,13 @@ export default function ({ navigation }) {
   return (
     <View>
       <View style={styles.searchBar}>
-        <MaterialCommunityIcons name="state-machine" size={40} color={color.background} />
+        <View style={styles.icon}>
+          <Image
+            source={require('../assets/images/MiRastra.png')}
+            resizeMode={'cover'}
+            style={styles.imageStyle}
+          />
+        </View>
         <TextInput
           error={''}
           info={''}
@@ -116,6 +122,10 @@ const makeStyle = (color) => {
       backgroundColor: color.black,
       height: '100%',
     },
+    icon: {
+      width: 50,
+      height: 50,
+    },
     searchBar: {
       height: 100,
       paddingTop: 30,
@@ -123,6 +133,10 @@ const makeStyle = (color) => {
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
+    },
+    imageStyle: {
+      width: '100%',
+      height: '100%',
     },
   });
 };

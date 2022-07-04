@@ -23,11 +23,12 @@ const makeStyle = (color, size, register) => {
       borderWidth: register ? 2 : null,
       borderColor: register ? color.primary : null,
       alignItems: 'center',
+      justifyContent: 'center',
       borderRadius: 20,
     },
     primaryText: {
       color: register ? color.primary : color.background,
-      fontSize: 28,
+      fontSize: 22,
     },
   });
 };

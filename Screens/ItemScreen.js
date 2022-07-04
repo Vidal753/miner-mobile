@@ -18,12 +18,13 @@ export default function () {
     time: '3:00',
     name: 'Larry Siles',
     stars: 5,
-    price: 300,
+    price: 1400,
     amount: 4,
     description:
       'Rastra con camaras de suguridad, vigilancia las 24 hora del dia trabajo de calidad con buen' +
-      'rendimiento de oro, con una gran capacidad de molienda',
+      'rendimiento de oro, con una gran capacidad de molienda.',
   };
+  const { description } = item;
 
   return (
     <View style={styles.container}>
@@ -37,14 +38,16 @@ export default function () {
       <StatusActivity status={item} horizontal />
       <View style={styles.principalInformation}>
         <Text style={styles.primaryText}>{item.name}</Text>
-        <StarRating star={item.stars} />
+        <StarRating star={item.stars} size={24} />
       </View>
       <Text style={styles.secondText}>{`Precio: C$${item.price} por hora.`}</Text>
-      <Text style={styles.secondText}>{`Capacidad: ${item.amount}T`}</Text>
-      <Text style={styles.secondText}>{item.description}</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Button title={'Reservar'} size={13} />
-        <Button title={'Llamar'} size={9} register />
+      <Text style={styles.secondText}>{`Capacidad: ${item.amount}T.`}</Text>
+      <Text style={styles.secondText}>
+        {description.length > 220 ? `${description.substring(0, 220)}...` : description}
+      </Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10 }}>
+        <Button title={'Reservar'} size={11} />
+        <Button title={'Calificar'} size={9} register />
       </View>
     </View>
   );
@@ -66,7 +69,7 @@ const makeStyle = (color) => {
       marginBottom: 10,
     },
     primaryText: {
-      color: color.black,
+      color: color.primary,
       fontSize: 28,
     },
     secondText: {

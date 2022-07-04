@@ -41,8 +41,7 @@ const makeStyle = (color, status) => {
     imageStyle: {
       width: '30%',
       height: '100%',
-      borderWidth: 2,
-      borderColor: color.black,
+      borderRadius: 5,
     },
     principalInformation: {
       flexDirection: 'row',
@@ -50,7 +49,7 @@ const makeStyle = (color, status) => {
       alignItems: 'center',
     },
     primaryText: {
-      color: color.black,
+      color: color.primary,
       fontSize: 22,
       paddingVertical: status.active ? 10 : null,
     },
