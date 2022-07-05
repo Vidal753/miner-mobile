@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'MiRastra.apps.MirastraConfig',
+    'miRastra.apps.MirastraConfig',
 
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
@@ -146,6 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

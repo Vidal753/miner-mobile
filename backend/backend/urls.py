@@ -3,5 +3,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('MiRastra.api.urls'))
+    path('api/', include('miRastra.api.urls'))
 ]
