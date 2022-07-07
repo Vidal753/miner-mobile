@@ -1,6 +1,11 @@
 from django.http import JsonResponse
+from miRastra.models import Rastra
+from .serializers import RatraSerializers
+from django.http import JsonResponse
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -11,9 +16,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Add custom claims
         token['username'] = user.username
-        # ...
 
         return token
 
@@ -30,3 +33,42 @@ def getRoutes(request):
     ]
 
     return Response(routes)
+
+
+@api_view(['POST'])
+def rastra_list(request):
+    data = request.data
+    if request.method == 'POST':
+        serializer = RatraSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
+
+        elif data == {}:
+            rastras = Rastra.objects.all()
+            serializer = RatraSerializers(rastras, many=True)
+            return Response(serializer.data)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST', 'PUT', 'DELETE'])
+def rastra_detail(request):
+    rastra_id = request.data["id"]
+    try:
+        rastra = Rastra.objects.get(pk=rastra_id)
+    except Rastra.DoesNotExist:
+        return Response({'__all__': 'The id does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'PUT':
+        serializer = RatraSerializers(rastra, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'__all__': 'Successful update'})
+    elif request.method == 'DELETE':
+        rastra.delete()
+        return Response({'__all__': 'Successful delete'})
+    elif request.method == 'POST':
+        serializer = RatraSerializers(rastra)
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
