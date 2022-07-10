@@ -1,10 +1,12 @@
 from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticated
+
 from miRastra.models import Rastra
 from .serializers import *
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -36,7 +38,9 @@ def getRoutes(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def rastra_list(request):
+    print(request.user.id)
     data = request.data
     if request.method == 'POST':
         serializer = RatraSerializers(data=request.data)

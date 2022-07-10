@@ -11,4 +11,5 @@ class RatraSerializers(serializers.ModelSerializer):
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'phone_number', 'city']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'phone_number', 'city', 'amount_rastra',
+                  'type']

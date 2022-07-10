@@ -1,9 +1,28 @@
 from django.contrib import admin
 from .models import *
+from django.contrib.auth.admin import UserAdmin
 
 
-class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'first_name', 'last_name', 'email', 'city', 'phone_number', 'amount_rastra', 'type']
+class UserAdmin(UserAdmin):
+    list_display = ['username', 'first_name', 'last_name', 'type', 'phone_number', 'city', 'amount_rastra',
+                    'is_active']
+    fieldsets = [
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'phone_number', 'city', 'type')}),
+        ('Permissions', {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+        }),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+    ]
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': (
+                'username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'phone_number', 'city',
+                'type'),
+        }),
+    )
+    list_filter = ['type', 'city']
 
 
 class RastraAdmin(admin.ModelAdmin):
@@ -18,7 +37,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ['user', 'rastra', 'amount', 'time', 'date','is_active']
+    list_display = ['user', 'rastra', 'amount', 'time', 'date', 'is_active']
 
 
 admin.site.register(Rastra, RastraAdmin)
