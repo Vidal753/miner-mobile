@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import TextInput from '../Components/TextInput';
-import Button from '../Components/Button';
+import TextInput from '../components/TextInput';
+import Button from '../components/Button';
 
 export default function () {
   const styles = makeStyle();

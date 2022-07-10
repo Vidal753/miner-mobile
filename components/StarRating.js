@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableWithoutFeedback, Animated } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { colors } from '../Constant/colors';
+import { colors } from '../constant/colors';
 
 export default function ({ active = false, star = 1, size = 18 }) {
   const [value, setValue] = useState(star);

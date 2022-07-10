@@ -4,10 +4,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { colors } from '../Constant/colors';
-import StarRating from '../Components/StarRating';
-import StatusActivity from '../Components/StatusActivity';
-import Button from '../Components/Button';
+import { colors } from '../constant/colors';
+import StarRating from '../components/StarRating';
+import StatusActivity from '../components/StatusActivity';
+import Button from '../components/Button';
 
 export default function () {
   const color = { ...colors };

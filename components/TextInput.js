@@ -5,7 +5,7 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import { colors } from '../Constant/colors';
+import { colors } from '../constant/colors';
 export default function (props) {
   const color = { ...colors };
   const styles = makeStyles(color, props);

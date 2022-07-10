@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { colors } from '../Constant/colors';
+import { colors } from '../constant/colors';
 
 export default function ({ status = {}, horizontal = false }) {
   const color = { ...colors };

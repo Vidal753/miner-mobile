@@ -4,10 +4,10 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import ItemNavigation from './ItemNavigation';
-import SettingsScreen from '../Screens/SettingsScreen';
-import LoginScreen from '../Screens/LoginScreen';
-import Header from '../Components/Header';
-import { colors } from '../Constant/colors';
+import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen from '../screens/LoginScreen';
+import Header from '../components/Header';
+import { colors } from '../constant/colors';
 
 const Tab = createBottomTabNavigator();
 

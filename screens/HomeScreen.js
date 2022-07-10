@@ -3,9 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
-import CardItem from '../Components/CardItem';
-import { colors } from '../Constant/colors';
-import TextInput from '../Components/TextInput';
+import CardItem from '../components/CardItem';
+import { colors } from '../constant/colors';
+import TextInput from '../components/TextInput';
 import api from '../api/api';
 
 export default function ({ navigation }) {
