@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from miRastra.models import Rastra, Reservation, User
+from miRastra.models import Rastra, Reservation, User, Rating
 
 
 class RatraSerializers(serializers.ModelSerializer):
@@ -13,3 +13,15 @@ class UserSerializers(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'phone_number', 'city', 'amount_rastra',
                   'type']
+
+
+class RatingSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = ['user', 'rastra', 'stars', 'comment']
+
+
+class ReservationSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Reservation
+        fields = ['id', 'user', 'rastra', 'amount', 'time', 'date', 'is_active']
