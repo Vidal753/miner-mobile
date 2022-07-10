@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from miRastra.models import Rastra
-from .serializers import RatraSerializers
+from .serializers import *
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
@@ -70,5 +70,14 @@ def rastra_detail(request):
     elif request.method == 'POST':
         serializer = RatraSerializers(rastra)
         return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['POST'])
+def get_user(request):
+    user_id = request.data["id"]
+    try:
+        user = User.objects.get(pk=user_id)
+        serializer = UserSerializers(user)
+        return Response(serializer.data)
+    except User.DoesNotExist:
+        return Response({'__all__': 'The id does not exist'}, status=status.HTTP_400_BAD_REQUEST)
