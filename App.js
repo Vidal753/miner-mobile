@@ -19,6 +19,12 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
-    return <CustomerNavigation />;
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <CustomerNavigation />
+        </PersistGate>
+      </Provider>
+    );
   }
 }
