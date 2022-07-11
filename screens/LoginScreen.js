@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet, Alert, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import { LOGIN } from '../reducer/auth';
@@ -10,7 +9,7 @@ import Text from '../components/Text';
 import TouchableText from '../components/TouchableText';
 import Separator from '../components/Separator';
 
-export default function () {
+export default function ({ navigation }) {
   const dispatch = useDispatch();
   const color = { ...colors };
   const user = useSelector((reducer) => reducer.auth.type);
@@ -49,7 +48,12 @@ export default function () {
         <TouchableText title={'¿Olvidaste tu Contraseña?'} />
         <View style={styles.buttonAlign}>
           <Button title={'Iniciar'} onPress={() => test()} />
-          <Button title={'Registrarse'} register size={12} />
+          <Button
+            title={'Registrarse'}
+            register
+            size={12}
+            onPress={() => navigation.navigate('register')}
+          />
         </View>
       </View>
     </ScrollView>

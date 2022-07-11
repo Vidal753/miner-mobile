@@ -103,7 +103,7 @@ const makeStyles = function (colors, props) {
       textAlignVertical: props.multiline ? 'top' : null,
       height: props.multiline ? 80 : null,
       fontSize: hp(2),
-      color: colors.text,
+      color: colors.primary,
       ...props.style,
     },
     securityEntry: {
