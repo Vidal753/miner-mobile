@@ -84,8 +84,8 @@ const makeStyles = function (colors, props) {
       ...props.containerStyle,
     },
     containerSimpleTextInput: {
-      height: 35,
-      width: 250,
+      height: 45,
+      width: wp(90),
       margin: 10,
       display: 'flex',
       flexDirection: 'row',
@@ -93,7 +93,7 @@ const makeStyles = function (colors, props) {
       justifyContent: 'space-between',
       borderRadius: props.multiline ? hp(10) : 25,
       backgroundColor: colors.background,
-      borderColor: colors.accent,
+      borderColor: colors.primary,
       borderWidth: 2,
       ...props.containerSimpleTextInput,
     },
@@ -109,7 +109,7 @@ const makeStyles = function (colors, props) {
     securityEntry: {
       position: 'absolute',
       right: 15,
-      top: props.register ? hp(1.9) : hp(1),
+      top: props.register ? hp(1.9) : hp(1.3),
     },
     textInputIcon: {
       justifyContent: 'center',
