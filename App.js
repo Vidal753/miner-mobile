@@ -1,7 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { useFonts } from 'expo-font';
-import CustomerNavigation from './Navigation/CustomerNavigation';
+import AppLoading from 'expo-app-loading';
+import MainNavigation from './Navigation/MainNavigation';
 import 'react-native-gesture-handler';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
@@ -15,11 +16,15 @@ export default function App() {
     'gotham-medium': require('./assets/fonts/Gotham-Medium.ttf'),
   });
 
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <CustomerNavigation />
-      </PersistGate>
-    </Provider>
-  );
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MainNavigation />
+        </PersistGate>
+      </Provider>
+    );
+  }
 }

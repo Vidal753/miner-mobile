@@ -7,9 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/MiRastra.png",
+      "image": "./assets/images/mining.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1c295b"
+      "backgroundColor": "#FFFFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

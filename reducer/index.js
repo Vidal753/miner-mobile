@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
-import auth, { LOG_OUT } from './auth';
+import auth from './auth';
 
 const appReducer = combineReducers({
   auth,
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === LOG_OUT) {
-    return appReducer(state, action);
+  if (action.type === 'logout') {
+    return appReducer(undefined, action);
   }
+
+  return appReducer(state, action);
 };
 
 export default rootReducer;

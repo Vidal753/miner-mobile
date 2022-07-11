@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { colors } from '../constant/colors';
 
-export default function ({ onPress, size = 10, title, register = false }) {
+export default function ({ onPress, size = 10, title, register = false, container = {} }) {
   const color = { ...colors };
-  const styles = makeStyle(color, size, register);
+  const styles = makeStyle(color, size, register, container);
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -13,7 +13,7 @@ export default function ({ onPress, size = 10, title, register = false }) {
   );
 }
 
-const makeStyle = (color, size, register) => {
+const makeStyle = (color, size, register, container) => {
   return StyleSheet.create({
     container: {
       height: 42,
@@ -25,6 +25,7 @@ const makeStyle = (color, size, register) => {
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 20,
+      ...container,
     },
     primaryText: {
       color: register ? color.primary : color.background,
