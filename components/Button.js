@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { colors } from '../Constant/colors';
+import { colors } from '../constant/colors';
 
 export default function ({ onPress, size = 10, title, register = false }) {
   const color = { ...colors };

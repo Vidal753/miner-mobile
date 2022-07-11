@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import CardItem from '../Components/CardItem';
-import { colors } from '../Constant/colors';
-import TextInput from '../Components/TextInput';
+import axios from 'axios';
+import CardItem from '../components/CardItem';
+import { colors } from '../constant/colors';
+import TextInput from '../components/TextInput';
+import api from '../api/api';
 
 export default function ({ navigation }) {
   const color = { ...colors };
@@ -48,6 +50,15 @@ export default function ({ navigation }) {
 
   const active = filterData.filter((status) => status.active === true);
   const inactive = filterData.filter((status) => status.active === false);
+
+  axios
+    .post('http://127.0.0.1:8000/api/rastra/', {})
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   const searchFilterFunction = (text) => {
     if (text) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { colors } from '../Constant/colors';
+import { colors } from '../constant/colors';
 import StarRating from './StarRating';
 import StatusActivity from './StatusActivity';
 

@@ -6,7 +6,7 @@ import {
 } from 'react-native-responsive-screen';
 import { FontAwesome } from '@expo/vector-icons';
 import { getHeaderTitle } from '@react-navigation/elements';
-import { colors } from '../Constant/colors';
+import { colors } from '../constant/colors';
 
 const Header = ({ navigation, options, back, onChangeValue }) => {
   //const title = getHeaderTitle(options, route.name);
