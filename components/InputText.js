@@ -1,19 +1,20 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { colors } from '../constant/colors';
-import Text, { SMALL } from '../components/Text';
-import TextInput from '../components/TextInput';
+import Text, { SMALL } from './Text';
+import TextInput from './TextInput';
 
-export default function () {
+export default function ({ security = false, title = '', placeholder = '' }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   return (
     <View>
-      <Text title={'Nombre de Usario'} type={SMALL} style={styles.text} />
+      <Text title={title} type={SMALL} style={styles.text} />
       <TextInput
         error={''}
         info={''}
-        placeholder={'Escriba el nombre de Usuario'}
+        securityEntry={security}
+        placeholder={placeholder}
         containerSimpleTextInput={styles.textInput}
       />
     </View>
@@ -25,8 +26,6 @@ const makeStyle = (color) => {
     text: {
       paddingLeft: 25,
       paddingBottom: 5,
-      fontSize: 15,
-      color: color.black,
     },
     textInput: {
       margin: 0,

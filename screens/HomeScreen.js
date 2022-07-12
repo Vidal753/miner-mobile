@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
 import CardItem from '../components/CardItem';
 import { colors } from '../constant/colors';
 import TextInput from '../components/TextInput';
+import Text, { SECONDARY } from '../components/Text';
 import api from '../api/api';
 
 export default function ({ navigation }) {
@@ -76,28 +78,43 @@ export default function ({ navigation }) {
   return (
     <View>
       <View style={styles.searchBar}>
-        <View style={styles.icon}>
-          <Image
-            source={require('../assets/images/MiRastra.png')}
-            resizeMode={'cover'}
-            style={styles.imageStyle}
-          />
+        {/*<View style={styles.icon}>*/}
+        {/*  <Image*/}
+        {/*    source={require('../assets/images/mining.png')}*/}
+        {/*    resizeMode={'cover'}*/}
+        {/*    style={styles.imageStyle}*/}
+        {/*  />*/}
+        {/*</View>*/}
+        <MaterialCommunityIcons name="gold" size={40} color={color.background} />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {filterActive ? (
+            <TextInput
+              error={''}
+              info={''}
+              containerSimpleTextInput={{ width: 250, height: 40 }}
+              placeholder={'Buscar'}
+              onChangeText={(event) => {
+                searchFilterFunction(event);
+              }}
+            />
+          ) : (
+            <Text
+              title={'RASTRAS'}
+              style={{
+                color: color.background,
+                paddingHorizontal: 70,
+                fontSize: heightPercentageToDP(3),
+              }}
+            />
+          )}
+          <TouchableOpacity onPress={() => setFilterActive(!filterActive)}>
+            <Ionicons
+              name="search-circle"
+              size={47}
+              color={filterActive ? color.background : color.surface}
+            />
+          </TouchableOpacity>
         </View>
-        <TextInput
-          error={''}
-          info={''}
-          placeholder={'Buscar'}
-          onChangeText={(event) => {
-            searchFilterFunction(event);
-          }}
-        />
-        <TouchableOpacity onPress={() => setFilterActive(!filterActive)}>
-          <Ionicons
-            name="search-circle"
-            size={40}
-            color={filterActive ? color.background : color.accent}
-          />
-        </TouchableOpacity>
       </View>
       <ScrollView style={styles.container}>
         {/* eslint-disable-next-line react/style-prop-object */}
@@ -130,7 +147,7 @@ export default function ({ navigation }) {
 const makeStyle = (color) => {
   return StyleSheet.create({
     container: {
-      backgroundColor: color.black,
+      backgroundColor: color.background,
       height: '100%',
     },
     icon: {
@@ -138,11 +155,12 @@ const makeStyle = (color) => {
       height: 50,
     },
     searchBar: {
+      paddingHorizontal: 10,
       height: 100,
       paddingTop: 30,
       backgroundColor: color.primary,
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'space-between',
       alignItems: 'center',
     },
     imageStyle: {

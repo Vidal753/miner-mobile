@@ -41,7 +41,7 @@ export default function ({ navigation }) {
             />
           </View>
           <Text title={'BIENVENIDO!'} />
-          <Separator width={300} />
+          <Separator width={75} />
         </View>
         <TextInput error={''} info={''} placeholder={'Nombre de Usario'} />
         <TextInput error={''} info={''} placeholder={'Contraseña'} securityEntry />

@@ -38,7 +38,6 @@ def getRoutes(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def rastra_list(request):
     data = request.data
     if request.method == 'POST':

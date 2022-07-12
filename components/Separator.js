@@ -4,8 +4,8 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { colors } from '../constant/colors';
 import Text from './Text';
 
-export default function ({ width = 90, color = colors.primary }) {
-  const styles = makeStyle(color, width);
+export default function ({ width = 90, color = colors.primary, style = {} }) {
+  const styles = makeStyle(color, width, style);
   return (
     <View style={{ alignItems: 'center' }}>
       <View style={styles.container} />
@@ -13,13 +13,14 @@ export default function ({ width = 90, color = colors.primary }) {
   );
 }
 
-const makeStyle = (color, width) => {
+const makeStyle = (color, width, style) => {
   return StyleSheet.create({
     container: {
       marginBottom: 15,
       height: 3,
-      width,
+      width: wp(width),
       backgroundColor: color,
+      ...style,
     },
   });
 };

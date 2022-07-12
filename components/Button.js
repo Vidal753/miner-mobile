@@ -1,10 +1,18 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { colors } from '../constant/colors';
 
-export default function ({ onPress, size = 10, title, register = false, container = {} }) {
+export default function ({
+  onPress,
+  size = 10,
+  title,
+  register = false,
+  container = {},
+  fontSize = 2.5,
+}) {
   const color = { ...colors };
-  const styles = makeStyle(color, size, register, container);
+  const styles = makeStyle(color, size, register, container, fontSize);
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -13,7 +21,7 @@ export default function ({ onPress, size = 10, title, register = false, containe
   );
 }
 
-const makeStyle = (color, size, register, container) => {
+const makeStyle = (color, size, register, container, fontSize) => {
   return StyleSheet.create({
     container: {
       height: 42,
@@ -29,7 +37,7 @@ const makeStyle = (color, size, register, container) => {
     },
     primaryText: {
       color: register ? color.primary : color.background,
-      fontSize: 22,
+      fontSize: hp(fontSize),
     },
   });
 };

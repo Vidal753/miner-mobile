@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { colors } from '../constant/colors';
 
 export const PRIMARY = 1;
@@ -31,27 +32,27 @@ export default function ({ title = '', type = PRIMARY, style }) {
 const makeStyle = (color, style) => {
   return StyleSheet.create({
     primary: {
-      fontSize: 35,
+      fontSize: hp(4),
       fontFamily: 'gotham-black',
       color: color.primary,
       ...style,
     },
     secondary: {
-      fontSize: 25,
+      fontSize: hp(3),
       fontFamily: 'gotham-bold',
       color: color.primary,
       ...style,
     },
     tertiary: {
-      fontSize: 25,
+      fontSize: hp(2),
       fontFamily: 'gotham-book',
       color: color.text,
       ...style,
     },
     small: {
-      fontSize: 16,
+      fontSize: hp(2),
       fontFamily: 'gotham-medium',
-      color: color.accent,
+      color: color.black,
       ...style,
     },
   });

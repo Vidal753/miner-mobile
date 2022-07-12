@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import { colors } from '../constant/colors';
 import StarRating from './StarRating';
 import StatusActivity from './StatusActivity';
+import Separator from './Separator';
 
 export default function ({ status = {}, onPress }) {
   const color = { ...colors };
   const styles = makeStyle(color, status);
   return (
-    <TouchableOpacity style={{ alignItems: 'center', marginVertical: 1 }} onPress={onPress}>
+    <TouchableOpacity style={{ alignItems: 'center' }} onPress={onPress}>
       <View style={styles.container}>
         <Image
           source={require('../assets/images/arrastra.png')}
@@ -25,6 +29,7 @@ export default function ({ status = {}, onPress }) {
           </View>
         </View>
       </View>
+      <Separator width={100} style={{ marginBottom: 0 }} />
     </TouchableOpacity>
   );
 }
@@ -36,7 +41,7 @@ const makeStyle = (color, status) => {
       height: 120,
       width: wp(100),
       padding: 10,
-      backgroundColor: status.active ? color.background : color.accent,
+      backgroundColor: status.active ? color.background : color.shadow,
     },
     imageStyle: {
       width: '30%',
@@ -45,18 +50,19 @@ const makeStyle = (color, status) => {
     },
     principalInformation: {
       flexDirection: 'row',
-      justifyContent: 'space-around',
       alignItems: 'center',
     },
     primaryText: {
       color: color.primary,
-      fontSize: 22,
-      paddingVertical: status.active ? 10 : null,
+      fontSize: hp(2.4),
+      fontFamily: 'gotham-medium',
+      paddingVertical: status.active ? 10 : 4,
     },
     secondText: {
       color: color.medium_black,
-      fontSize: 16,
-      paddingRight: 20,
+      fontSize: hp(1.9),
+      fontFamily: 'gotham-book',
+      paddingRight: 10,
     },
   });
 };

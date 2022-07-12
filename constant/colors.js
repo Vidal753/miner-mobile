@@ -11,7 +11,7 @@ export const colors = {
   text: '#5f6166',
   accent: '#989898',
   surface: '#bfbfc7',
-  shadow: '#f6f7fa',
+  shadow: '#e9e9ea',
   background: '#ffffff',
   black: '#000',
   medium_black: '#3b3b3b',

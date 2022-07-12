@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { colors } from '../constant/colors';
 
 export default function ({ status = {}, horizontal = false }) {
@@ -11,9 +12,15 @@ export default function ({ status = {}, horizontal = false }) {
     <View style={styles.container}>
       <View style={styles.status}>
         <FontAwesome name="circle" size={15} color={status.active ? color.green : color.red} />
-        <Text style={{ paddingLeft: 7 }}>{status.state}</Text>
+        <Text style={styles.text}>{status.state}</Text>
       </View>
-      {status.active === false && <Text>{`Aproximadamente: ${status.time} M`}</Text>}
+      {status.active === false && (
+        <Text
+          style={[
+            styles.text,
+            { paddingLeft: 0, fontFamily: 'gotham-book' },
+          ]}>{`Disponible en: ${status.time} minutos`}</Text>
+      )}
     </View>
   );
 }
@@ -27,6 +34,11 @@ const makeStyle = (horizontal) => {
     status: {
       flexDirection: 'row',
       alignItems: 'center',
+    },
+    text: {
+      paddingLeft: 7,
+      fontFamily: 'gotham-medium',
+      fontSize: hp(1.7),
     },
   });
 };
