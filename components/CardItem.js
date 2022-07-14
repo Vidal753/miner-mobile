@@ -40,11 +40,11 @@ const makeStyle = (color, status) => {
       flexDirection: 'row',
       height: 120,
       width: wp(100),
-      padding: 10,
+      padding: 5,
       backgroundColor: status.active ? color.background : color.shadow,
     },
     imageStyle: {
-      width: '30%',
+      width: '35%',
       height: '100%',
       borderRadius: 5,
     },

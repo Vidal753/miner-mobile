@@ -17,7 +17,7 @@ const makeStyle = (color, width, style) => {
   return StyleSheet.create({
     container: {
       marginBottom: 15,
-      height: 3,
+      height: 2,
       width: wp(width),
       backgroundColor: color,
       ...style,

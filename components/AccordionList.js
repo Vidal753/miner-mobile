@@ -2,7 +2,7 @@ import React from 'react';
 import { List } from 'react-native-paper';
 import { Alert, View } from 'react-native';
 
-export default function ({ navigation }) {
+export default function () {
   return (
     <View styles={{ flex: 1 }}>
       <View style={{ marginTop: 500 }} />

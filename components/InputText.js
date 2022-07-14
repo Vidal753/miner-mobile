@@ -21,7 +21,7 @@ export default function ({ security = false, title = '', placeholder = '' }) {
   );
 }
 
-const makeStyle = (color) => {
+const makeStyle = () => {
   return StyleSheet.create({
     text: {
       paddingLeft: 25,

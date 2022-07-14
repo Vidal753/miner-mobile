@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,8 +7,9 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 import { getHeaderTitle } from '@react-navigation/elements';
 import { colors } from '../constant/colors';
+import Text from './Text';
 
-const Header = ({ navigation, options, back, onChangeValue }) => {
+const Header = ({ navigation, options, back }) => {
   //const title = getHeaderTitle(options, route.name);
   const title = getHeaderTitle(options);
   const color = { ...colors };
@@ -24,7 +25,7 @@ const Header = ({ navigation, options, back, onChangeValue }) => {
         ) : (
           <View style={styles.button} />
         )}
-        <Text style={styles.primaryText}>{title}</Text>
+        <Text title={title} type={2} style={{ color: color.background }} />
         <View style={styles.button} />
       </View>
     </Fragment>

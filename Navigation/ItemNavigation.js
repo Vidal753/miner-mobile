@@ -24,7 +24,7 @@ export default function () {
         name={'Item'}
         component={ItemScreen}
         options={{
-          title: 'Información',
+          title: 'INFORMACIÓN',
         }}
       />
     </Stack.Navigator>

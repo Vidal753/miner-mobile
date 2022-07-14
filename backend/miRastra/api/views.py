@@ -50,12 +50,10 @@ def rastra_list(request):
             rastras = Rastra.objects.all()
             serializer = RatraSerializers(rastras, many=True)
             return Response(serializer.data)
-
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
 def rastra_detail(request):
     rastra_id = request.data["id"]
     try:
@@ -73,10 +71,10 @@ def rastra_detail(request):
     elif request.method == 'POST':
         serializer = RatraSerializers(rastra)
         return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def get_user(request):
     user_id = request.user.id
     try:
@@ -88,7 +86,6 @@ def get_user(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def rating_list(request):
     user = request.user.id
     data = request.data
@@ -102,10 +99,10 @@ def rating_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def reservation_list(request):
     user = request.user.id
     data = request.data
@@ -119,6 +116,7 @@ def reservation_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
@@ -134,3 +132,11 @@ def confirmReservation(request):
             return Response({'__all__': 'Successful update'})
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_data(request):
+    if request.method == 'GET':
+        rastras = Rastra.objects.all()
+        serializer = RatraSerializers(rastras, many=True)
+        return Response(serializer.data)
