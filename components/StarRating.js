@@ -31,9 +31,9 @@ const Star = ({ filled = false, size }) => {
 
   return (
     <FontAwesome
-      name={filled === true ? 'star' : 'star-o'}
+      name={filled ? 'star' : 'star-o'}
       size={size}
-      color={color.yellow}
+      color={filled ? color.yellow : color.surface}
       style={{ marginLeft: 2 }}
     />
   );

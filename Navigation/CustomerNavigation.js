@@ -5,6 +5,7 @@ import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons';
 import ItemNavigation from './ItemNavigation';
 import SettingsScreen from '../screens/SettingsScreen';
 import Header from '../components/Header';
+import PracticeScreen from '../screens/PracticeScreen';
 import { colors } from '../constant/colors';
 
 const Tab = createBottomTabNavigator();
@@ -61,6 +62,24 @@ export default function () {
                 <Ionicons name="settings-outline" size={24} color={colors.primary} />
               )}
               <Text>AJUSTES</Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={'PracticeScreen'}
+        component={PracticeScreen}
+        options={{
+          title: 'Practica',
+          tabBarIcon: ({ focused }) => (
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
+              {focused ? (
+                <AntDesign name="exclamationcircle" size={24} color={colors.primary} />
+              ) : (
+                <AntDesign name="exclamationcircleo" size={24} color="black" />
+              )}
+              <Text>PRACTICA</Text>
             </View>
           ),
         }}

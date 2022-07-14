@@ -10,6 +10,8 @@ import StatusActivity from '../components/StatusActivity';
 import Button from '../components/Button';
 import Separator from '../components/Separator';
 import TouchableText from '../components/TouchableText';
+import Modal from '../components/Modal';
+import RatingSheet from '../components/RatingSheet';
 
 let active = false;
 
@@ -34,7 +36,6 @@ export default function () {
 
   function showText() {
     active = !active;
-    console.log(active);
     if (active) {
       setSize(description.length);
       setTitle('Ver menos...');
@@ -50,7 +51,7 @@ export default function () {
         <Image
           source={require('../assets/images/arrastra.png')}
           resizeMode={'stretch'}
-          style={{ width: '100%', height: hp(45) }}
+          style={{ width: '100%', height: hp(42.1) }}
         />
       </View>
       <View style={styles.container}>
@@ -74,8 +75,8 @@ export default function () {
             }}
           />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10 }}>
-            <Button title={'Reservar'} size={11} />
-            <Button title={'Calificación'} size={12} register />
+            <Modal />
+            <RatingSheet />
           </View>
         </ScrollView>
       </View>
