@@ -7,7 +7,6 @@ import {
 import { colors } from '../constant/colors';
 import StarRating from '../components/StarRating';
 import StatusActivity from '../components/StatusActivity';
-import Button from '../components/Button';
 import Separator from '../components/Separator';
 import TouchableText from '../components/TouchableText';
 import Modal from '../components/Modal';

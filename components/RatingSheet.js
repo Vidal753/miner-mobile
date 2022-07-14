@@ -1,11 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import BottomSheet from 'react-native-gesture-bottom-sheet';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 import Button from './Button';
 import Separator from './Separator';
@@ -14,7 +9,7 @@ import TextInput from './TextInput';
 import Text from './Text';
 import SimpleAlert from './SimpleAlert';
 
-export default function ({ error = {} }) {
+export default function () {
   const color = { ...colors };
   const styles = makeStyle(color);
   const bottomSheet = useRef(null);
@@ -32,13 +27,12 @@ export default function ({ error = {} }) {
             <Text title={'Calificar'} style={{ color: color.background, padding: 10 }} />
             <StarRating active size={40} />
             <Separator color={color.background} width={60} style={{ marginVertical: 10 }} />
-            <TextInput multiline placeholder={'Cuanta tu experiencia'} />
+            <TextInput multiline placeholder={'Cuentanos tu experiencia...'} />
             <Button
               register
               title={'Enviar'}
-              size={9}
-              fontSize={4}
-              container={{ height: 60, width: 130, borderRadius: 60 }}
+              fontSize={3}
+              container={{ height: 50, width: 100, borderRadius: 30 }}
               onPress={() => setVisible(!visible)}
             />
             <SimpleAlert
@@ -53,12 +47,12 @@ export default function ({ error = {} }) {
           </View>
         </ScrollView>
       </BottomSheet>
-      <Button register title={'Calificar'} onPress={() => bottomSheet.current.show()} />
+      <Button register title={'Calificación'} onPress={() => bottomSheet.current.show()} />
     </View>
   );
 }
 
-const makeStyle = (color) => {
+const makeStyle = () => {
   return StyleSheet.create({
     container: {
       alignItems: 'center',

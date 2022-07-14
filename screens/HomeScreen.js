@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Animated } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 import CardItem from '../components/CardItem';
 import { colors } from '../constant/colors';
 import TextInput from '../components/TextInput';
-import api from '../api/api';
+import Text from '../components/Text';
 
 export default function ({ navigation }) {
   const color = { ...colors };
@@ -48,7 +47,7 @@ export default function ({ navigation }) {
   const [filterData, setFilterData] = useState(status);
   const [filterActive, setFilterActive] = useState(false);
   const leftValue = useState(new Animated.Value(500))[0];
-  const opacity = useState(new Animated.Value(0))[0];
+  const value = useState(new Animated.Value(0))[0];
 
   function move() {
     setFilterActive(!filterActive);
@@ -58,10 +57,10 @@ export default function ({ navigation }) {
         duration: 1000,
         useNativeDriver: true,
       }).start();
-      Animated.timing(opacity, {
-        toValue: 1,
+      Animated.timing(value, {
+        toValue: -300,
         duration: 2000,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(leftValue, {
@@ -69,10 +68,10 @@ export default function ({ navigation }) {
         duration: 1000,
         useNativeDriver: true,
       }).start();
-      Animated.timing(opacity, {
+      Animated.timing(value, {
         toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
+        duration: 900,
+        useNativeDriver: false,
       }).start();
     }
   }
@@ -103,18 +102,25 @@ export default function ({ navigation }) {
         {/*    style={styles.imageStyle}*/}
         {/*  />*/}
         {/*</View>*/}
-        <MaterialCommunityIcons name="gold" size={40} color={color.background} />
+        <Animated.View
+          style={[
+            {
+              width: 30,
+              transform: [{ translateX: value }],
+            },
+          ]}>
+          <Text title={'RASTRAS'} type={2} style={{ color: color.background, width: 140 }} />
+        </Animated.View>
         <Animated.View
           style={[
             {
               transform: [{ translateX: leftValue }],
-              opacity,
             },
           ]}>
           <TextInput
             error={''}
             info={''}
-            containerSimpleTextInput={{ width: 250, height: 40 }}
+            containerSimpleTextInput={{ width: 270, height: 40 }}
             placeholder={'Buscar'}
             onChangeText={(event) => {
               searchFilterFunction(event);

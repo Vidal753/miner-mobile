@@ -37,7 +37,7 @@ export default function ({
               }}
             />
             <Button
-              fontSize={4}
+              fontSize={3}
               title={buttonTitle}
               container={{ height: 60, width: 60, borderRadius: 30 }}
               onPress={() => {

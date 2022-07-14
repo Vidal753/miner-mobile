@@ -29,7 +29,8 @@ export default function () {
               info={''}
               placeholder={'Toneladas'}
               keyboardType={'number-pad'}
-              containerSimpleTextInput={{ width: 100 }}
+              containerSimpleTextInput={{ width: 150 }}
+              text={{ textAlign: 'center', paddingLeft: 0, paddingHorizontal: 0 }}
             />
             <Text title={'Número Teléfonico'} type={2} />
             <TextInput
@@ -60,7 +61,7 @@ export default function () {
   );
 }
 
-const makeStyle = (color) => {
+const makeStyle = () => {
   return StyleSheet.create({
     centeredView: {
       flex: 1,

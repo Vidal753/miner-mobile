@@ -6,6 +6,7 @@ import ItemNavigation from './ItemNavigation';
 import SettingsScreen from '../screens/SettingsScreen';
 import Header from '../components/Header';
 import PracticeScreen from '../screens/PracticeScreen';
+import ReserveScreen from '../screens/ReserveScreen';
 import { colors } from '../constant/colors';
 
 const Tab = createBottomTabNavigator();
@@ -43,25 +44,24 @@ export default function () {
               ) : (
                 <AntDesign name="home" size={24} color={colors.primary} />
               )}
-              <Text>INICIO</Text>
             </View>
           ),
         }}
       />
       <Tab.Screen
-        name={'Setting'}
-        component={SettingsScreen}
+        name={'ReserveScreen'}
+        component={ReserveScreen}
         options={{
-          title: 'Settings',
+          title: 'RESERVACIONES',
+          tabBarBadge: undefined,
           tabBarIcon: ({ focused }) => (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <Ionicons name="settings" size={24} color={colors.primary} />
+                <AntDesign name="clockcircle" size={24} color={colors.primary} />
               ) : (
-                <Ionicons name="settings-outline" size={24} color={colors.primary} />
+                <AntDesign name="clockcircleo" size={24} color={colors.primary} />
               )}
-              <Text>AJUSTES</Text>
             </View>
           ),
         }}
@@ -70,16 +70,32 @@ export default function () {
         name={'PracticeScreen'}
         component={PracticeScreen}
         options={{
-          title: 'Practica',
+          title: 'NOTIFICACIONES',
           tabBarIcon: ({ focused }) => (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <AntDesign name="exclamationcircle" size={24} color={colors.primary} />
+                <Ionicons name="notifications-circle" size={34} color={colors.primary} />
               ) : (
-                <AntDesign name="exclamationcircleo" size={24} color="black" />
+                <Ionicons name="notifications-circle-outline" size={34} color={colors.primary} />
               )}
-              <Text>PRACTICA</Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={'Setting'}
+        component={SettingsScreen}
+        options={{
+          title: 'PERFIL',
+          tabBarIcon: ({ focused }) => (
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
+              {focused ? (
+                <Ionicons name="person-circle" size={32} color={colors.primary} />
+              ) : (
+                <Ionicons name="person-circle-outline" size={32} color={colors.primary} />
+              )}
             </View>
           ),
         }}

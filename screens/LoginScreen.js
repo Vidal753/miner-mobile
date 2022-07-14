@@ -13,7 +13,7 @@ export default function ({ navigation }) {
   const dispatch = useDispatch();
   const color = { ...colors };
   const user = useSelector((reducer) => reducer.auth.type);
-  const styles = makeStyle(color);
+  const styles = makeStyle();
 
   function test() {
     dispatch({
@@ -60,7 +60,7 @@ export default function ({ navigation }) {
   );
 }
 
-const makeStyle = (color) => {
+const makeStyle = () => {
   return StyleSheet.create({
     container: {
       paddingTop: 100,

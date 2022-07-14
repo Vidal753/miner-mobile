@@ -8,12 +8,11 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 
-export default function ({ choices = [], onChangeValue, error = {} }) {
+export default function ({ choices = [] }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [selected, setSelected] = useState('-------');
   const bottomSheet = useRef(null);
-  const typeError = Object.keys(error);
 
   return (
     <View>
