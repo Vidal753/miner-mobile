@@ -6,6 +6,7 @@ import MyRatingScreen from '../screens/MyRatingScreen';
 import MyReservationScreen from '../screens/MyReservationScreen';
 import PersonalInformationScreen from '../screens/PersonalInformationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ItemScreen from '../screens/ItemScreen';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,13 @@ export default function () {
       <Stack.Screen
         name={'PersonalInformationScreen'}
         component={PersonalInformationScreen}
+        options={{
+          title: 'INFORMACIÓN',
+        }}
+      />
+      <Stack.Screen
+        name={'Item'}
+        component={ItemScreen}
         options={{
           title: 'INFORMACIÓN',
         }}

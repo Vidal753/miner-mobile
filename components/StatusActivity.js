@@ -14,7 +14,7 @@ export default function ({ status = {}, horizontal = false }) {
         <FontAwesome name="circle" size={15} color={status.active ? color.green : color.red} />
         <Text style={styles.text}>{status.state}</Text>
       </View>
-      {status.active === false && (
+      {status.active === false && status.time !== undefined && (
         <Text
           style={[
             styles.text,

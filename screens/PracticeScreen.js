@@ -196,7 +196,7 @@ function Function5() {
 }
 
 export default function () {
-  return <Function5 />;
+  return <Funtion1 />;
 }
 
 const makeStyle = (color) => {
