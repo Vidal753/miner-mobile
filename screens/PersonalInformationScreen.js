@@ -6,7 +6,7 @@ export default function () {
   const styles = makeStyle();
   return (
     <ScrollView style={{ backgroundColor: colors.background }}>
-      <Text>ReserveScreen</Text>
+      <Text>Informacion personal</Text>
     </ScrollView>
   );
 }

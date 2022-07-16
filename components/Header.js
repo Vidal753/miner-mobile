@@ -55,8 +55,8 @@ function makeStyles(color) {
       width: wp(100),
     },
     button: {
-      minWidth: wp(10),
-      minHeight: 14,
+      minWidth: wp(12),
+      minHeight: 30,
       flexDirection: 'row',
       alignItems: 'center',
     },

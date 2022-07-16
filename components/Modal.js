@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Modal } from 'react-native';
+import { View, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 import Button from './Button';
 import Text from './Text';
@@ -23,6 +24,13 @@ export default function () {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <View>
+              <TouchableOpacity
+                style={{ marginLeft: '70%' }}
+                onPress={() => setModalVisible(false)}>
+                <Ionicons name="ios-close-circle-outline" size={40} color={color.primary} />
+              </TouchableOpacity>
+            </View>
             <Text title={'Cantidad de Brosa'} type={2} />
             <TextInput
               error={''}
@@ -43,7 +51,7 @@ export default function () {
             />
             <SimpleAlert
               description={
-                'Su reservacíon ha sido enviada, por favor espere, en unos momento llamaremos para confirmar su reservación.'
+                'Su reservacíon ha sido enviada, en unos momento llamaremos para confirmar su reservación.\n\nSu reservacion se agrego a la reservaciones.'
               }
               buttonTitle={'OK'}
               changeVisible={(visible) => {
@@ -72,7 +80,8 @@ const makeStyle = () => {
       margin: 20,
       backgroundColor: 'white',
       borderRadius: 20,
-      padding: 35,
+      paddingVertical: 15,
+      paddingHorizontal: 25,
       alignItems: 'center',
       shadowColor: '#000',
       shadowOffset: {

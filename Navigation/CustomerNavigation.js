@@ -1,13 +1,15 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons';
+import { Platform, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ItemNavigation from './ItemNavigation';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileNavigation from './ProfileNavigation';
 import Header from '../components/Header';
 import PracticeScreen from '../screens/PracticeScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import { colors } from '../constant/colors';
+import Text from '../components/Text';
 
 const Tab = createBottomTabNavigator();
 export default function () {
@@ -40,10 +42,12 @@ export default function () {
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <Entypo name="home" size={24} color={colors.primary} />
+                <Ionicons name="home" size={30} color={colors.primary} />
               ) : (
-                <AntDesign name="home" size={24} color={colors.primary} />
+                <Ionicons name="home-outline" size={30} color={colors.primary} />
               )}
+
+              <Text title={'Inicio'} type={2} style={{ fontSize: hp(1.3) }} />
             </View>
           ),
         }}
@@ -58,10 +62,11 @@ export default function () {
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <AntDesign name="clockcircle" size={24} color={colors.primary} />
+                <Ionicons name="time" size={30} color={colors.primary} />
               ) : (
-                <AntDesign name="clockcircleo" size={24} color={colors.primary} />
+                <Ionicons name="time-outline" size={30} color={colors.primary} />
               )}
+              <Text title={'Reservación'} type={2} style={{ fontSize: hp(1.3) }} />
             </View>
           ),
         }}
@@ -75,27 +80,30 @@ export default function () {
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <Ionicons name="notifications-circle" size={34} color={colors.primary} />
+                <Ionicons name="notifications" size={30} color={colors.primary} />
               ) : (
-                <Ionicons name="notifications-circle-outline" size={34} color={colors.primary} />
+                <Ionicons name="notifications-outline" size={30} color={colors.primary} />
               )}
+              <Text title={'Notificación'} type={2} style={{ fontSize: hp(1.3) }} />
             </View>
           ),
         }}
       />
       <Tab.Screen
-        name={'Setting'}
-        component={SettingsScreen}
+        name={'ProfileNavigation'}
+        component={ProfileNavigation}
         options={{
-          title: 'PERFIL',
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
               {focused ? (
-                <Ionicons name="person-circle" size={32} color={colors.primary} />
+                <Ionicons name="person" size={30} color={colors.primary} />
               ) : (
-                <Ionicons name="person-circle-outline" size={32} color={colors.primary} />
+                <Ionicons name="person-outline" size={30} color={colors.primary} />
               )}
+
+              <Text title={'Perfil'} type={2} style={{ fontSize: hp(1.3) }} />
             </View>
           ),
         }}
