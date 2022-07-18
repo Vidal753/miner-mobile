@@ -7,18 +7,25 @@ export default function ({ title, description }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={styles.container}>
       <Text style={styles.secondText}>{`${title}: `}</Text>
-      <Text style={[styles.secondText, { fontFamily: 'gotham-book' }]}>{`${description}`}</Text>
+      <Text
+        style={[
+          styles.secondText,
+          { fontFamily: 'gotham-book', textAlign: 'justify' },
+        ]}>{`${description}`}</Text>
     </View>
   );
 }
 const makeStyle = (color) => {
   return StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      paddingVertical: 1,
+    },
     secondText: {
       color: color.medium_black,
       fontSize: hp(2),
-      paddingVertical: 1,
       fontFamily: 'gotham-medium',
     },
   });

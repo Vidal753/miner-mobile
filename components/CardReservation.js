@@ -8,6 +8,7 @@ import { colors } from '../constant/colors';
 import StatusActivity from './StatusActivity';
 import Button from './Button';
 import DefineText from './DefineText';
+import EditReservationModal from '../components/EditReservationModal';
 
 export default function ({ status = {} }) {
   const color = { ...colors };
@@ -30,7 +31,7 @@ export default function ({ status = {} }) {
         </View>
       </View>
       <View style={styles.buttonArea}>
-        <Button title={'Editar'} register container={{ height: 30 }} size={6} fontSize={2} />
+        <EditReservationModal />
         <Button title={'Eliminar'} container={{ height: 30 }} size={7} fontSize={2} />
         <DefineText title={'Total'} description={`${status.total}C$`} />
       </View>
