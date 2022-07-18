@@ -7,6 +7,7 @@ import {
 import { colors } from '../constant/colors';
 import StatusActivity from './StatusActivity';
 import Button from './Button';
+import DefineText from './DefineText';
 
 export default function ({ status = {} }) {
   const color = { ...colors };
@@ -19,36 +20,19 @@ export default function ({ status = {} }) {
           resizeMode={'cover'}
           style={styles.imageContainer}
         />
-        <View style={{ paddingLeft: 10, paddingVertical: 2, justifyContent: 'space-between' }}>
+        <View style={styles.textArea}>
           <StatusActivity status={status} />
           <Text style={styles.primaryText}>{status.name}</Text>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.secondText}>{`Cantidad: `}</Text>
-            <Text
-              style={[
-                styles.secondText,
-                { fontFamily: 'gotham-book' },
-              ]}>{`${status.amount}T`}</Text>
-          </View>
+          <DefineText title={'Cantidad'} description={`${status.amount}T`} />
           {status.finish !== '' && (
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.secondText}>{`Finaliza: `}</Text>
-              <Text style={[styles.secondText, { fontFamily: 'gotham-book' }]}>
-                {status.finish}
-              </Text>
-            </View>
+            <DefineText title={'Finaliza'} description={`${status.finish}`} />
           )}
         </View>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          height: '30%',
-          justifyContent: 'space-between',
-          paddingHorizontal: 5,
-        }}>
-        <Button title={'Editar'} register container={{ height: 30 }} size={8} fontSize={2} />
-        <Button title={'Eliminar'} container={{ height: 30 }} size={8} fontSize={2} />
+      <View style={styles.buttonArea}>
+        <Button title={'Editar'} register container={{ height: 30 }} size={6} fontSize={2} />
+        <Button title={'Eliminar'} container={{ height: 30 }} size={7} fontSize={2} />
+        <DefineText title={'Total'} description={`${status.total}C$`} />
       </View>
     </View>
   );
@@ -80,17 +64,23 @@ const makeStyle = (color) => {
       paddingVertical: 1,
       fontFamily: 'gotham-bold',
     },
-    secondText: {
-      color: color.medium_black,
-      fontSize: hp(2),
-      paddingVertical: 1,
-      fontFamily: 'gotham-medium',
-    },
     imageContainer: {
       padding: 3,
       height: '100%',
       width: '35%',
       borderRadius: 18,
+    },
+    textArea: {
+      paddingLeft: 10,
+      paddingVertical: 2,
+      justifyContent: 'space-between',
+    },
+    buttonArea: {
+      flexDirection: 'row',
+      height: '30%',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 5,
     },
   });
 };

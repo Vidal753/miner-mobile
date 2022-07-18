@@ -78,7 +78,7 @@ export default function () {
               showText();
             }}
           />
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10 }}>
+          <View style={styles.buttonArea}>
             <Modal />
             <RatingSheet />
           </View>
@@ -119,6 +119,11 @@ const makeStyle = (color) => {
       textAlign: 'justify',
       paddingVertical: 2,
       fontFamily: 'gotham-book',
+    },
+    buttonArea: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingTop: 10,
     },
   });
 };

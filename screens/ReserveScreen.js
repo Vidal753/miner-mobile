@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { colors } from '../constant/colors';
 import CardReservation from '../components/CardReservation';
 
-export default function ({ route, navigation }) {
-  const [active, setActive] = useState(false);
+export default function ({ route }) {
   let reservation = [];
   const styles = makeStyle();
   const reservations = [
@@ -15,6 +14,7 @@ export default function ({ route, navigation }) {
       amount: 10,
       time: '',
       finish: '',
+      total: 35000,
     },
     {
       active: true,
@@ -23,6 +23,7 @@ export default function ({ route, navigation }) {
       amount: 10,
       time: '',
       finish: '10/08/2022',
+      total: 3000,
     },
     {
       active: false,
@@ -31,6 +32,7 @@ export default function ({ route, navigation }) {
       amount: 10,
       time: '',
       finish: '',
+      total: 1500,
     },
     {
       active: true,
@@ -39,6 +41,7 @@ export default function ({ route, navigation }) {
       amount: 10,
       time: '',
       finish: '10/08/2022',
+      total: 2000,
     },
     {
       active: false,
@@ -47,6 +50,7 @@ export default function ({ route, navigation }) {
       amount: 10,
       time: '',
       finish: '',
+      total: 3000,
     },
     {
       active: false,
@@ -64,6 +68,7 @@ export default function ({ route, navigation }) {
       amount: 10,
       time: '',
       finish: '',
+      total: 10000,
     },
   ];
   if (route.params === undefined) {

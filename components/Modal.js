@@ -38,7 +38,7 @@ export default function () {
               placeholder={'Toneladas'}
               keyboardType={'number-pad'}
               containerSimpleTextInput={{ width: 150 }}
-              text={{ textAlign: 'center', paddingLeft: 0, paddingHorizontal: 0 }}
+              text={styles.textInputText}
             />
             <Text title={'Número Teléfonico'} type={2} />
             <TextInput
@@ -47,7 +47,7 @@ export default function () {
               keyboardType={'phone-pad'}
               placeholder={'5676-9999'}
               containerSimpleTextInput={{ width: 150 }}
-              text={{ textAlign: 'center', paddingLeft: 0, paddingHorizontal: 0 }}
+              text={styles.textInputText}
             />
             <Text title={'Cédula'} type={2} />
             <TextInput
@@ -56,7 +56,7 @@ export default function () {
               keyboardType={'number-pad'}
               placeholder={'Digite su cédula'}
               containerSimpleTextInput={{ width: 180 }}
-              text={{ textAlign: 'center', paddingLeft: 0, paddingHorizontal: 0 }}
+              text={styles.textInputText}
             />
             <SimpleAlert
               description={
@@ -103,6 +103,11 @@ const makeStyle = () => {
     },
     buttonClose: {
       backgroundColor: '#2196F3',
+    },
+    textInputText: {
+      textAlign: 'center',
+      paddingLeft: 0,
+      paddingHorizontal: 0,
     },
   });
 };

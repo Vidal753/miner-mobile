@@ -95,13 +95,6 @@ export default function ({ navigation }) {
   return (
     <View>
       <View style={styles.searchBar}>
-        {/*<View style={styles.icon}>*/}
-        {/*  <Image*/}
-        {/*    source={require('../assets/images/mining.png')}*/}
-        {/*    resizeMode={'cover'}*/}
-        {/*    style={styles.imageStyle}*/}
-        {/*  />*/}
-        {/*</View>*/}
         <Animated.View
           style={[
             {
