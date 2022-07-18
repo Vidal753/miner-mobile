@@ -51,7 +51,7 @@ export default function () {
             />
             <SimpleAlert
               description={
-                'Su reservacíon ha sido enviada, en unos momento llamaremos para confirmar su reservación.\n\nSu reservacion se agrego a la reservaciones.'
+                'Su reservacíon ha sido enviada, en unos momento llamaremos para confirmar su reservación.\n\nSu reservación se agrego al área de reservaciones.'
               }
               buttonTitle={'OK'}
               changeVisible={(visible) => {

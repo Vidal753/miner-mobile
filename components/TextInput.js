@@ -99,7 +99,7 @@ const makeStyles = function (colors, props) {
     },
     textInput: {
       width: '100%',
-      paddingLeft: 10,
+      paddingHorizontal: 10,
       paddingTop: props.multiline ? 10 : 0,
       textAlignVertical: props.multiline ? 'top' : null,
       height: props.multiline ? 80 : null,

@@ -54,7 +54,7 @@ export default function () {
     <ScrollView style={{ backgroundColor: colors.background }}>
       <View style={styles.container}>
         {rating.map((rate, index) => (
-          <RatingCard rating={rate} />
+          <RatingCard key={index} rating={rate} />
         ))}
       </View>
     </ScrollView>

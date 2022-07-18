@@ -3,6 +3,7 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 import ProfileButton from '../components/ProfileButton';
 import { colors } from '../constant/colors';
 import EditProfile from '../components/EditProfile';
+import PasswordModal from '../components/PasswordModal';
 
 export default function ({ navigation }) {
   const color = { ...colors };
@@ -32,7 +33,7 @@ export default function ({ navigation }) {
           icon={'file-tray'}
           onPress={() => navigation.navigate('MyReservationScreen')}
         />
-        <ProfileButton title={'Cambiar Contraseña'} icon={'key'} />
+        <PasswordModal />
         <ProfileButton title={'Cerrar Sesión'} style={styles.logOut} />
       </View>
     </ScrollView>

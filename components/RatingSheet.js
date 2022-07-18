@@ -27,7 +27,11 @@ export default function () {
             <Text title={'Calificar'} style={{ color: color.background, padding: 10 }} />
             <StarRating active size={40} />
             <Separator color={color.background} width={60} style={{ marginVertical: 10 }} />
-            <TextInput multiline placeholder={'Cuentanos tu experiencia...'} />
+            <TextInput
+              multiline
+              placeholder={'Describe brevemente tu experiencia...'}
+              maxLength={143}
+            />
             <Button
               register
               title={'Enviar'}
