@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Header from '../components/Header';
 import MyRastraScreen from '../screens/MyRastraScreen';
 import MyRatingScreen from '../screens/MyRatingScreen';
-import MyReservationScreen from '../screens/MyReservationScreen';
+import ReserveScreen from '../screens/ReserveScreen';
 import PersonalInformationScreen from '../screens/PersonalInformationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ItemScreen from '../screens/ItemScreen';
@@ -25,7 +25,7 @@ export default function () {
       />
       <Stack.Screen
         name={'MyReservationScreen'}
-        component={MyReservationScreen}
+        component={ReserveScreen}
         options={{
           title: 'MIS RESERVACIONES',
         }}

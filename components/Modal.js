@@ -49,6 +49,15 @@ export default function () {
               containerSimpleTextInput={{ width: 150 }}
               text={{ textAlign: 'center', paddingLeft: 0, paddingHorizontal: 0 }}
             />
+            <Text title={'Cédula'} type={2} />
+            <TextInput
+              error={''}
+              info={''}
+              keyboardType={'number-pad'}
+              placeholder={'Digite su cédula'}
+              containerSimpleTextInput={{ width: 180 }}
+              text={{ textAlign: 'center', paddingLeft: 0, paddingHorizontal: 0 }}
+            />
             <SimpleAlert
               description={
                 'Su reservacíon ha sido enviada, en unos momento llamaremos para confirmar su reservación.\n\nSu reservación se agrego al área de reservaciones.'

@@ -56,7 +56,7 @@ const makeStyle = (color, status) => {
       color: color.primary,
       fontSize: hp(2.4),
       fontFamily: 'gotham-medium',
-      paddingVertical: status.active ? 10 : 4,
+      paddingVertical: 10,
     },
     secondText: {
       color: color.medium_black,

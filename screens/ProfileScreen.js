@@ -31,7 +31,11 @@ export default function ({ navigation }) {
         <ProfileButton
           title={'Mis Reservaciones'}
           icon={'file-tray'}
-          onPress={() => navigation.navigate('MyReservationScreen')}
+          onPress={() =>
+            navigation.navigate('MyReservationScreen', {
+              store: true,
+            })
+          }
         />
         <PasswordModal />
         <ProfileButton title={'Cerrar Sesión'} style={styles.logOut} />

@@ -14,7 +14,7 @@ export default function ({ navigation }) {
     {
       active: false,
       state: 'Ocupado',
-      time: '10:00',
+      time: '',
       name: 'Larry Siles',
       price: '1500',
       stars: 5,
@@ -30,7 +30,7 @@ export default function ({ navigation }) {
     {
       active: false,
       state: 'Ocupado',
-      time: '10:00',
+      time: '',
       name: 'Carlos Hernandez',
       price: '1500',
       stars: 4,

@@ -11,10 +11,20 @@ export default function ({ status = {}, horizontal = false }) {
   return (
     <View style={styles.container}>
       <View style={styles.status}>
-        <FontAwesome name="circle" size={15} color={status.active ? color.green : color.red} />
+        <FontAwesome
+          name="circle"
+          size={15}
+          color={
+            status.active
+              ? color.green
+              : status.state === 'Ocupada' || status.state === 'Cancelada'
+              ? color.red
+              : color.orange
+          }
+        />
         <Text style={styles.text}>{status.state}</Text>
       </View>
-      {status.active === false && status.time !== undefined && (
+      {status.active === false && status.time !== '' && (
         <Text
           style={[
             styles.text,

@@ -30,7 +30,7 @@ export default function () {
       'rendimiento de oro, con una gran capacidad de molienda.description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :',
   };
   const { description } = item;
-  const [size, setSize] = useState(220);
+  const [size, setSize] = useState(150);
   const [title, setTitle] = useState('Ver más...');
 
   function showText() {
@@ -39,7 +39,7 @@ export default function () {
       setSize(description.length);
       setTitle('Ver menos...');
     } else {
-      setSize(220);
+      setSize(150);
       setTitle('Ver más...');
     }
   }
@@ -61,8 +61,13 @@ export default function () {
         </View>
         <Separator width={90} />
         <ScrollView>
+          <Text style={styles.secondText}>{`Propietario: Larry Siles`}</Text>
           <Text style={styles.secondText}>{`Precio: C$${item.price} por hora.`}</Text>
           <Text style={styles.secondText}>{`Capacidad: ${item.amount}T.`}</Text>
+          <Text
+            style={
+              styles.secondText
+            }>{`Dirección: De la iglesia la bola media cuadra al sur.`}</Text>
           <Text style={[styles.secondText, { paddingVertical: 0 }]}>
             {description.length > size ? `${description.substring(0, size)}...` : description}
           </Text>
