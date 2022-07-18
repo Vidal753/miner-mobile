@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 import ImageItem from '../components/ImageItem';
 
@@ -20,13 +21,34 @@ export default function ({ navigation }) {
     { name: 'Larry Siles', active: false, state: 'Ocupada', time: '' },
   ];
   return (
-    <ScrollView style={{ backgroundColor: colors.background }}>
-      <View style={styles.containerButton}>
-        {data.map((value, index) => (
-          <ImageItem key={index} item={value} onPress={() => navigation.navigate('Item')} />
-        ))}
-      </View>
-    </ScrollView>
+    <View>
+      <ScrollView style={{ backgroundColor: colors.background }}>
+        <View style={styles.containerButton}>
+          {data.map((value, index) => (
+            <ImageItem
+              key={index}
+              item={value}
+              onPress={() => navigation.navigate('Item', { supplier: true })}
+            />
+          ))}
+        </View>
+      </ScrollView>
+
+      <TouchableOpacity
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 70,
+          position: 'absolute',
+          bottom: 100,
+          right: 20,
+          height: 70,
+          backgroundColor: colors.primary,
+          borderRadius: 100,
+        }}>
+        <AntDesign name="plus" size={30} color={colors.background} />
+      </TouchableOpacity>
+    </View>
   );
 }
 

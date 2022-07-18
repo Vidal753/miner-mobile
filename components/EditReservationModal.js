@@ -55,7 +55,12 @@ export default function () {
               onPress={() => setModalVisible(!modalVisible)}
             />
             <View style={{ alignItems: 'center' }}>
-              <Button title={'Confirmar'} onPress={() => setVisible(!visible)} />
+              <Button
+                title={'Guardar Cambios'}
+                onPress={() => setVisible(!visible)}
+                fontSize={2.5}
+                size={16}
+              />
             </View>
           </View>
         </View>

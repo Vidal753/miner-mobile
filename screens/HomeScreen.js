@@ -140,7 +140,7 @@ export default function ({ navigation }) {
             key={index}
             status={state}
             onPress={() => {
-              navigation.navigate('Item');
+              navigation.navigate('Item', { supplier: false });
             }}
           />
         ))}
@@ -149,7 +149,7 @@ export default function ({ navigation }) {
             key={index}
             status={state}
             onPress={() => {
-              navigation.navigate('Item');
+              navigation.navigate('Item', { supplier: false });
             }}
           />
         ))}

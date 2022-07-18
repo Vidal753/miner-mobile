@@ -12,13 +12,19 @@ import TouchableText from '../components/TouchableText';
 import Modal from '../components/Modal';
 import RatingSheet from '../components/RatingSheet';
 import DefineText from '../components/DefineText';
+import EditReservationModal from '../components/EditReservationModal';
+import EditRastraModal from '../components/EditRastraModal';
+import SimpleAlert from '../components/SimpleAlert';
 import Button from '../components/Button';
 
 let active = false;
 
-export default function () {
+export default function ({ route }) {
+  const { supplier } = route.params;
+  console.log(supplier);
   const color = { ...colors };
   const styles = makeStyle(color);
+  const [visible, setVisible] = useState(false);
   const item = {
     active: false,
     state: 'Ocupada',
@@ -79,10 +85,28 @@ export default function () {
               showText();
             }}
           />
-          <View style={styles.buttonArea}>
-            <Modal />
-            <RatingSheet />
-          </View>
+          <SimpleAlert
+            description={
+              'Estas a punto de eliminar tu reservación. ¿Estas seguro de que quieres eliminarla?'
+            }
+            error
+            changeVisible={(visible) => {
+              setVisible(visible);
+            }}
+            visible={visible}
+            onPress={() => {}}
+          />
+          {supplier ? (
+            <View style={styles.buttonArea}>
+              <EditRastraModal />
+              <Button title={'Eliminar'} onPress={() => setVisible(true)} />
+            </View>
+          ) : (
+            <View style={styles.buttonArea}>
+              <Modal />
+              <RatingSheet />
+            </View>
+          )}
         </ScrollView>
       </View>
     </View>
