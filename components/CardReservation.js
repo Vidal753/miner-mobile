@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import {
   heightPercentageToDP as hp,
@@ -9,10 +9,12 @@ import StatusActivity from './StatusActivity';
 import Button from './Button';
 import DefineText from './DefineText';
 import EditReservationModal from '../components/EditReservationModal';
+import SimpleAlert from './SimpleAlert';
 
 export default function ({ status = {} }) {
   const color = { ...colors };
   const styles = makeStyle(color);
+  const [visible, setVisible] = useState(false);
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', height: '70%' }}>
@@ -32,7 +34,25 @@ export default function ({ status = {} }) {
       </View>
       <View style={styles.buttonArea}>
         <EditReservationModal />
-        <Button title={'Eliminar'} container={{ height: 30 }} size={7} fontSize={2} />
+
+        <SimpleAlert
+          description={
+            'Estas a punto de eliminar tu reservación. ¿Estas seguro de que quieres eliminarla?'
+          }
+          error
+          changeVisible={(visible) => {
+            setVisible(visible);
+          }}
+          visible={visible}
+          onPress={() => {}}
+        />
+        <Button
+          title={'Eliminar'}
+          container={{ height: 30 }}
+          size={7}
+          fontSize={2}
+          onPress={() => setVisible(true)}
+        />
         <DefineText title={'Total'} description={`${status.total}C$`} />
       </View>
     </View>

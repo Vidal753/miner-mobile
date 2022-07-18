@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Modal } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
@@ -36,15 +36,41 @@ export default function ({
                 fontSize: heightPercentageToDP(2.3),
               }}
             />
-            <Button
-              fontSize={3}
-              title={buttonTitle}
-              container={{ height: 60, width: 60, borderRadius: 30 }}
-              onPress={() => {
-                onPress();
-                changeVisible(!visible);
-              }}
-            />
+            {error ? (
+              <View style={{ flexDirection: 'row' }}>
+                <Button
+                  fontSize={2.4}
+                  title={'Cancelar'}
+                  register
+                  container={{ height: 35, marginRight: 40 }}
+                  size={8}
+                  onPress={() => {
+                    onPress();
+                    changeVisible(!visible);
+                  }}
+                />
+                <Button
+                  fontSize={2.4}
+                  title={'Confirmar'}
+                  container={{ height: 35 }}
+                  size={8}
+                  onPress={() => {
+                    onPress();
+                    changeVisible(!visible);
+                  }}
+                />
+              </View>
+            ) : (
+              <Button
+                fontSize={3}
+                title={buttonTitle}
+                container={{ height: 60, width: 60, borderRadius: 30 }}
+                onPress={() => {
+                  onPress();
+                  changeVisible(!visible);
+                }}
+              />
+            )}
           </View>
         </View>
       </Modal>

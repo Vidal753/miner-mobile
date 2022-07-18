@@ -54,7 +54,7 @@ export default function ({ route }) {
     },
     {
       active: false,
-      state: 'Finalizada',
+      state: 'Finalizado',
       name: 'Larry Siles',
       amount: 10,
       time: '',
@@ -63,7 +63,7 @@ export default function ({ route }) {
     },
     {
       active: false,
-      state: 'Cancelada',
+      state: 'Cancelado',
       name: 'Larry Siles',
       amount: 10,
       time: '',
@@ -73,7 +73,7 @@ export default function ({ route }) {
   ];
   if (route.params === undefined) {
     reservation = reservations.filter(
-      (reservation) => reservation.state !== 'Finalizada' && reservation.state !== 'Cancelada'
+      (reservation) => reservation.state !== 'Finalizado' && reservation.state !== 'Cancelado'
     );
   } else {
     reservation = reservations.filter(

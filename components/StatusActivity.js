@@ -17,7 +17,7 @@ export default function ({ status = {}, horizontal = false }) {
           color={
             status.active
               ? color.green
-              : status.state === 'Ocupada' || status.state === 'Cancelada'
+              : status.state === 'Ocupado' || status.state === 'Cancelado'
               ? color.red
               : color.orange
           }
