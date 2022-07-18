@@ -12,8 +12,7 @@ import TouchableText from '../components/TouchableText';
 import Modal from '../components/Modal';
 import RatingSheet from '../components/RatingSheet';
 import DefineText from '../components/DefineText';
-import EditReservationModal from '../components/EditReservationModal';
-import EditRastraModal from '../components/EditRastraModal';
+import EditRastraModal from '../components/RastraModal';
 import SimpleAlert from '../components/SimpleAlert';
 import Button from '../components/Button';
 
@@ -98,7 +97,11 @@ export default function ({ route }) {
           />
           {supplier ? (
             <View style={styles.buttonArea}>
-              <EditRastraModal />
+              <EditRastraModal
+                title={'Editar Rastra'}
+                alertTitle={'Se edito correctamente su Rastra.'}
+                buttonTitle={'Editar'}
+              />
               <Button title={'Eliminar'} onPress={() => setVisible(true)} />
             </View>
           ) : (

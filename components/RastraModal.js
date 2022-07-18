@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 import Button from './Button';
 import Text from './Text';
@@ -8,7 +8,7 @@ import SimpleAlert from './SimpleAlert';
 import Separator from './Separator';
 import InputText from './InputText';
 
-export default function () {
+export default function ({ title = '', alertTitle = '', buttonTitle = '' }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [modalVisible, setModalVisible] = useState(false);
@@ -34,7 +34,7 @@ export default function () {
                 </TouchableOpacity>
               </View>
               <View style={{ alignItems: 'center' }}>
-                <Text title={'Editar Rastra'} />
+                <Text title={title} />
                 <Separator width={80} />
               </View>
               <InputText title={'Nombre'} placeholder={'Nombre de la Rastra'} type={2} />
@@ -45,7 +45,7 @@ export default function () {
               <InputText title={'Dirección'} placeholder={'Dirección de la Rastra'} type={3} />
               <InputText title={'Descripción'} placeholder={'Descripción de la Rastra'} type={3} />
               <SimpleAlert
-                description={'Se edito correctamente su Rastra.'}
+                description={alertTitle}
                 buttonTitle={'OK'}
                 changeVisible={(visible) => {
                   setVisible(visible);
@@ -55,17 +55,37 @@ export default function () {
               />
               <View style={{ alignItems: 'center' }}>
                 <Button
-                  title={'Guardar Cambios'}
+                  title={'Guardar'}
                   onPress={() => setVisible(!visible)}
                   fontSize={2.5}
-                  size={16}
+                  size={10}
                 />
               </View>
             </View>
           </View>
         </ScrollView>
       </Modal>
-      <Button title={'Editar'} register onPress={() => setModalVisible(true)} />
+      {buttonTitle === '' ? (
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          style={{
+            borderWidth: 2,
+            borderColor: color.background,
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 70,
+            position: 'absolute',
+            bottom: 100,
+            right: 20,
+            height: 70,
+            backgroundColor: color.primary,
+            borderRadius: 100,
+          }}>
+          <AntDesign name="plus" size={28} color={color.background} />
+        </TouchableOpacity>
+      ) : (
+        <Button title={buttonTitle} register onPress={() => setModalVisible(true)} />
+      )}
     </View>
   );
 }

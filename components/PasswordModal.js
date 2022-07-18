@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { colors } from '../constant/colors';
 import Button from './Button';
 import Text from './Text';
-import TextInput from './TextInput';
 import SimpleAlert from './SimpleAlert';
 import ProfileButton from './ProfileButton';
 import Separator from './Separator';
+import InputText from './InputText';
 
 export default function () {
   const color = { ...colors };
@@ -37,27 +34,24 @@ export default function () {
                 <Ionicons name="ios-close-circle-outline" size={40} color={color.primary} />
               </TouchableOpacity>
             </View>
-            <Text title={'Contraseña Anterior'} type={2} style={{ fontSize: hp(2.6) }} />
-            <TextInput
-              error={''}
-              info={''}
-              placeholder={'Escribar la contraseña anterior'}
-              containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
+            <View style={{ alignItems: 'center' }}>
+              <Text title={'Cambiar Contraseña'} type={1} fontSize={3.4} />
+              <Separator width={80} />
+            </View>
+            <InputText
+              title={'Contraseña Anterior'}
+              placeholder={'Escriba la contraseña anterior'}
+              type={2}
             />
-            <Separator width={80} />
-            <Text title={'Nueva Contraseña'} type={2} style={{ fontSize: hp(2.6) }} />
-            <TextInput
-              error={''}
-              info={''}
-              placeholder={'Escribar la nueva contraseña'}
-              containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
+            <InputText
+              title={'Nueva Contraseña'}
+              placeholder={'Escriba la nueva contraseña'}
+              type={2}
             />
-            <Text title={'Confirmar Contraseña'} type={2} style={{ fontSize: hp(2.6) }} />
-            <TextInput
-              error={''}
-              info={''}
-              placeholder={'Escribar nuevamente la contraseña'}
-              containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
+            <InputText
+              title={'Confirmar Contraseña'}
+              placeholder={'Escriba nuevamente la contraseña'}
+              type={2}
             />
             <SimpleAlert
               description={'Su contraseña se ha cambiado exitosamente.'}

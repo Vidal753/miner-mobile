@@ -162,8 +162,8 @@ export default function ({ navigation }) {
 const makeStyle = (color) => {
   return StyleSheet.create({
     container: {
-      backgroundColor: color.background,
       height: '100%',
+      backgroundColor: color.background,
     },
     icon: {
       width: 50,

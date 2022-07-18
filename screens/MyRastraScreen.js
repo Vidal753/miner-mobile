@@ -3,6 +3,7 @@ import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 import ImageItem from '../components/ImageItem';
+import EditRastraModal from '../components/RastraModal';
 
 export default function ({ navigation }) {
   const styles = makeStyle();
@@ -33,21 +34,7 @@ export default function ({ navigation }) {
           ))}
         </View>
       </ScrollView>
-
-      <TouchableOpacity
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: 70,
-          position: 'absolute',
-          bottom: 100,
-          right: 20,
-          height: 70,
-          backgroundColor: colors.primary,
-          borderRadius: 100,
-        }}>
-        <AntDesign name="plus" size={30} color={colors.background} />
-      </TouchableOpacity>
+      <EditRastraModal title={'Agregar Rastra'} alertTitle={'Se guardo correctamente su Rastra.'} />
     </View>
   );
 }

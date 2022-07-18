@@ -33,8 +33,9 @@ export default function ({ choices = [] }) {
             </TouchableOpacity>
           </View>
           <View>
-            {choices.map((value) => (
+            {choices.map((value, index) => (
               <TouchableOpacity
+                key={index}
                 style={styles.choice}
                 onPress={() => {
                   setSelected(value.choice_text);

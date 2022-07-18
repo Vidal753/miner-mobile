@@ -6,7 +6,7 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ItemNavigation from './ItemNavigation';
 import ProfileNavigation from './ProfileNavigation';
 import Header from '../components/Header';
-import PracticeScreen from '../screens/PracticeScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import { colors } from '../constant/colors';
 import Text from '../components/Text';
@@ -72,8 +72,8 @@ export default function () {
         }}
       />
       <Tab.Screen
-        name={'PracticeScreen'}
-        component={PracticeScreen}
+        name={'NotificationScreen'}
+        component={NotificationScreen}
         options={{
           title: 'NOTIFICACIONES',
           tabBarIcon: ({ focused }) => (
