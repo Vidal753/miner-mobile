@@ -33,8 +33,19 @@ export default function ({ status = {} }) {
         </View>
       </View>
       <View style={styles.buttonArea}>
-        <EditReservationModal />
-
+        {status.state === 'Pendiente...' && (
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <EditReservationModal />
+            <Button
+              title={'Eliminar'}
+              container={{ height: 30, marginLeft: 5 }}
+              size={7}
+              fontSize={2}
+              onPress={() => setVisible(true)}
+            />
+          </View>
+        )}
+        <DefineText title={'Total'} description={`${status.total}C$`} />
         <SimpleAlert
           description={
             'Estas a punto de eliminar tu reservación. ¿Estas seguro de que quieres eliminarla?'
@@ -46,14 +57,6 @@ export default function ({ status = {} }) {
           visible={visible}
           onPress={() => {}}
         />
-        <Button
-          title={'Eliminar'}
-          container={{ height: 30 }}
-          size={7}
-          fontSize={2}
-          onPress={() => setVisible(true)}
-        />
-        <DefineText title={'Total'} description={`${status.total}C$`} />
       </View>
     </View>
   );

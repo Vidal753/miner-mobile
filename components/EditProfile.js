@@ -15,11 +15,13 @@ export default function (props) {
         <View style={styles.profile}>
           <Ionicons name="person-circle" size={wp(52)} color={colors.primary} />
         </View>
-        <View style={styles.pencilContainer}>
-          <TouchableOpacity style={styles.pencil}>
-            <MaterialCommunityIcons name="pencil-circle" size={wp(12)} color={colors.card} />
-          </TouchableOpacity>
-        </View>
+        {props.edit && (
+          <View style={styles.pencilContainer}>
+            <TouchableOpacity style={styles.pencil}>
+              <MaterialCommunityIcons name="pencil-circle" size={wp(12)} color={colors.card} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </Fragment>
   );

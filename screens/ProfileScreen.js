@@ -11,7 +11,7 @@ export default function ({ navigation }) {
   return (
     <ScrollView style={{ backgroundColor: color.background }}>
       <View style={styles.container}>
-        <EditProfile />
+        <EditProfile edit={false} />
         <ProfileButton
           title={'Información Personal'}
           icon={'document-text'}
