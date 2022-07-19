@@ -8,8 +8,8 @@ import EditRastraModal from '../components/RastraModal';
 export default function ({ navigation }) {
   const styles = makeStyle();
   const data = [
-    { name: 'Larry Siles Gonzales', active: true, state: 'Disponible', time: '' },
-    { name: 'Larry Siles', active: true, state: 'Disponible', time: '' },
+    { name: 'Larry Siles Gonzales', active: true, state: 'Disponible' },
+    { name: 'Larry Siles', active: true, state: 'Disponible' },
     { name: 'Larry Siles', active: false, state: 'Ocupada', time: '' },
     { name: 'Larry Siles', active: false, state: 'Ocupada', time: '' },
     { name: 'Larry Siles Gonzales', active: true, state: 'Disponible', time: '' },

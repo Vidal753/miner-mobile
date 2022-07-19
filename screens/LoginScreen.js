@@ -23,7 +23,6 @@ export default function ({ navigation }) {
         type: 3,
       },
     });
-    Alert.alert('' + user);
   }
 
   return (
@@ -63,7 +62,7 @@ export default function ({ navigation }) {
 const makeStyle = () => {
   return StyleSheet.create({
     container: {
-      paddingTop: 100,
+      paddingTop: 70,
       padding: 10,
     },
     buttonAlign: {

@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { LOG_OUT } from '../reducer/auth';
 import ProfileButton from '../components/ProfileButton';
 import { colors } from '../constant/colors';
 import EditProfile from '../components/EditProfile';
@@ -7,7 +9,13 @@ import PasswordModal from '../components/PasswordModal';
 
 export default function ({ navigation }) {
   const color = { ...colors };
+  const dispatch = useDispatch();
   const styles = makeStyle();
+  const log_out = () => {
+    dispatch({
+      type: LOG_OUT,
+    });
+  };
   return (
     <ScrollView style={{ backgroundColor: color.background }}>
       <View style={styles.container}>
@@ -38,7 +46,7 @@ export default function ({ navigation }) {
           }
         />
         <PasswordModal />
-        <ProfileButton title={'Cerrar Sesión'} style={styles.logOut} />
+        <ProfileButton title={'Cerrar Sesión'} style={styles.logOut} onPress={() => log_out()} />
       </View>
     </ScrollView>
   );

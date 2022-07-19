@@ -19,13 +19,7 @@ export default function () {
         <InputText title={'Correo Electrónico'} placeholder={'Escriba su correo electronico'} />
         <InputText title={'Teléfono'} placeholder={'Número de teléfono'} />
         <ButtonSheet choices={choices} />
-        <Button
-          title={'Guardar Cambios'}
-          container={styles.button}
-          fontSize={2.5}
-          size={16}
-          register
-        />
+        <Button title={'Guardar'} container={styles.button} fontSize={2.5} size={9} register />
       </View>
     </ScrollView>
   );

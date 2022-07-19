@@ -45,8 +45,7 @@ export default function ({ navigation }) {
           <Button
             title={'Registrarse'}
             container={styles.button}
-            fontSize={3.5}
-            size={15}
+            size={12}
             onPress={() => navigation.navigate('login')}
           />
         </View>

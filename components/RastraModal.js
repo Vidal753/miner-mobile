@@ -66,23 +66,24 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '' }) {
         </ScrollView>
       </Modal>
       {buttonTitle === '' ? (
-        <TouchableOpacity
-          onPress={() => setModalVisible(true)}
-          style={{
-            borderWidth: 2,
-            borderColor: color.background,
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 70,
-            position: 'absolute',
-            bottom: 100,
-            right: 20,
-            height: 70,
-            backgroundColor: color.primary,
-            borderRadius: 100,
-          }}>
-          <AntDesign name="plus" size={28} color={color.background} />
-        </TouchableOpacity>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity
+            onPress={() => setModalVisible(true)}
+            style={{
+              borderWidth: 2,
+              borderColor: color.background,
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 70,
+              position: 'absolute',
+              height: 70,
+              bottom: 100,
+              backgroundColor: color.primary,
+              borderRadius: 100,
+            }}>
+            <AntDesign name="plus" size={28} color={color.background} />
+          </TouchableOpacity>
+        </View>
       ) : (
         <Button title={buttonTitle} register onPress={() => setModalVisible(true)} />
       )}
