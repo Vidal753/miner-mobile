@@ -13,7 +13,7 @@ class User(AbstractUser):
 
     class Meta:
         verbose_name = 'User'
-        verbose_name_plural = 'User'
+        verbose_name_plural = 'Users'
 
     def __str__(self):
         return self.username
@@ -38,16 +38,19 @@ class Rastra(models.Model):
     def __str__(self):
         return self.name
 
+    def propietario(self):
+        return [self.user.first_name, self.user.last_name]
+
     def stars(self):
         ratings = self.rating_set.all()
         registers = ratings.count()
         if not registers == 0:
-            stars = sum([rating.stars for rating in ratings])/registers
+            stars = round(sum([rating.stars for rating in ratings])/registers)
         else:
             stars = 0
         return stars
 
-    def state(self):
+    def is_active(self):
         status = self.reservation_set.all()
         is_active = True
         for state in status:
@@ -55,13 +58,13 @@ class Rastra(models.Model):
                 is_active = False
         return is_active
 
-    def time(self):
+    def finish(self):
         status = self.reservation_set.all()
-        time = ''
+        finish = ''
         for state in status:
             if state.is_active:
-                time = state.time
-        return time
+                finish = state.finish
+        return finish
 
 
 class Rating(models.Model):
@@ -75,18 +78,53 @@ class Rating(models.Model):
         verbose_name_plural = 'Ratings'
 
     def __str__(self):
-        return self.comment
+        return self.rastra.name
+
+    def name(self):
+        return self.rastra.name
+
+    def user_name(self):
+        return [self.user.first_name, self.user.last_name]
 
 
 class Reservation(models.Model):
+    PENDING = 'Pendiente...'
+    ACTIVE = 'Activo'
+    FINISH = 'Finalizado'
+    CANCELLED = 'Cancelado'
+    RESERVATION_STATES = [
+        (PENDING, 'Pendiente...'),
+        (ACTIVE, 'Activo'),
+        (FINISH, 'Finalizado'),
+        (CANCELLED, 'Cancelado'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='User')
     rastra = models.ForeignKey(Rastra, on_delete=models.CASCADE, verbose_name='Rastra')
     amount = models.FloatField(default=0, verbose_name='Amount')
-    time = models.DateField(null=True, blank=True)
     date = models.DateField(auto_now_add=True, verbose_name='Date')
+    finish = models.DateField(blank=True, null=True)
+    state = models.CharField(
+        max_length=20,
+        choices=RESERVATION_STATES,
+        default=PENDING,
+    )
     is_active = models.BooleanField(default=False, null=True, blank=True, verbose_name='Is_active')
 
     class Meta:
         verbose_name = 'Reservation'
         verbose_name_plural = 'Reservations'
 
+    def __str__(self):
+        return self.rastra.name
+
+    def name(self):
+        return self.rastra.name
+
+    def user_name(self):
+        return [self.user.first_name, self.user.last_name]
+
+    def total(self):
+        return self.rastra.price * self.amount
+
+    def phone_number(self):
+        return self.user.phone_number

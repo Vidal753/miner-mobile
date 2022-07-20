@@ -26,18 +26,19 @@ class UserAdmin(UserAdmin):
 
 
 class RastraAdmin(admin.ModelAdmin):
-    list_display = ['user', 'name', 'price', 'amount', 'stars', 'time', 'state']
-    list_filter = ['price']
-    search_fields = ['name']
+    list_display = ['user', 'propietario', 'name', 'price', 'amount', 'stars', 'finish', 'is_active']
+    list_filter = ['price', 'user']
+    search_fields = ['name', 'propietario']
 
 
 class RatingAdmin(admin.ModelAdmin):
-    list_display = ['rastra', 'stars', 'comment']
+    list_display = ['user', 'rastra', 'stars', 'comment']
     list_filter = ['rastra', 'stars']
 
 
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ['user', 'rastra', 'amount', 'time', 'date', 'is_active']
+    list_display = ['user', 'rastra', 'amount', 'total', 'finish', 'date', 'state', 'is_active']
+    list_filter = ['is_active', 'rastra']
 
 
 admin.site.register(Rastra, RastraAdmin)

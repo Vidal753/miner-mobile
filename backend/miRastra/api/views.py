@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AnonymousUser
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 
@@ -8,7 +9,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
-
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -19,12 +21,52 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         token['username'] = user.username
+        token['last_name'] = user.last_name
 
         return token
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+
+
+@api_view(['POST'])
+def login(request):
+    username = request.data['username']
+    password = request.data['password']
+    error = {}
+    if username == '':
+        error["username"] = "Este campo no puede estar en blanco."
+        if password == '':
+            error["password"] = "Este campo no puede estar en blanco."
+    if error != {}:
+        print(error)
+        return Response(error, status=status.HTTP_400_BAD_REQUEST)
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        token = get_tokens_for_user(user)
+        serializer = UserSerializers(user)
+        return Response({"user": serializer.data, "token": token}, status=status.HTTP_200_OK)
+    return Response({"__all__": "El usuario no existe"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def register(request):
+    if request.method == 'POST':
+        serializer = CreateUserSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'__all__': 'Successful Register'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
@@ -38,22 +80,24 @@ def getRoutes(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def rastra_list(request):
+    user = request.user
     data = request.data
-    if request.method == 'POST':
-        serializer = RatraSerializers(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
-
-        elif data == {}:
-            rastras = Rastra.objects.all()
-            serializer = RatraSerializers(rastras, many=True)
-            return Response(serializer.data)
+    if data == {}:
+        rastras = Rastra.objects.all()
+        serializer = RatraSerializers(rastras, many=True)
+        return Response(serializer.data)
+    data["user"] = user.id
+    serializer = RatraSerializers(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def rastra_detail(request):
     rastra_id = request.data["id"]
     try:
@@ -75,25 +119,46 @@ def rastra_detail(request):
 
 
 @api_view(['POST'])
-def get_user(request):
-    user_id = request.user.id
-    try:
-        user = User.objects.get(pk=user_id)
-        serializer = UserSerializers(user)
-        return Response(serializer.data)
-    except User.DoesNotExist:
-        return Response({'__all__': 'The id does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+@permission_classes([IsAuthenticated])
+def get_supplier_rastras(request):
+    user = request.user
+    rastras = user.rastra_set.all()
+    serializer = SupplierRatrasSerializers(rastras, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def get_user(request):
+    user_id = request.user.id
+    user = User.objects.get(pk=user_id)
+    serializer = UserSerializers(user)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def rating_list(request):
-    user = request.user.id
+    user = request.user
     data = request.data
-    if data == {}:
-        ratings = Rating.objects.all()
+    if user.type == 1:
+        ratings = user.rating_set.all()
         serializer = RatingSerializers(ratings, many=True)
         return Response(serializer.data)
-    data["user"] = user
+    try:
+        rastra = Rastra.objects.get(pk=data["id"])
+    except Rastra.DoesNotExist:
+        return Response({"__all__": "El id no existe"}, status=status.HTTP_400_BAD_REQUEST)
+    ratings = rastra.rating_set.all()
+    serializer = RatingSerializers(ratings, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_rating(request):
+    data = request.data
+    data["user"] = request.user.id
     if request.method == 'POST':
         serializer = RatingSerializers(data=request.data)
         if serializer.is_valid():
@@ -103,14 +168,15 @@ def rating_list(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def reservation_list(request):
-    user = request.user.id
+    user = request.user
     data = request.data
     if data == {}:
-        reservation = Reservation.objects.all()
+        reservation = user.reservation_set.all()
         serializer = ReservationSerializers(reservation, many=True)
         return Response(serializer.data)
-    data["user"] = user
+    data["user"] = user.id
     if request.method == 'POST':
         serializer = ReservationSerializers(data=request.data)
         if serializer.is_valid():
@@ -120,9 +186,11 @@ def reservation_list(request):
 
 
 @api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def confirmReservation(request):
+    data = request.data
     try:
-        reservation = Reservation.objects.get(pk=2)
+        reservation = Reservation.objects.get(pk=data["id"])
     except Reservation.DoesNotExist:
         return Response({'__all__': 'The id does not exist'}, status=status.HTTP_400_BAD_REQUEST)
     if request.method == 'PUT':
@@ -132,11 +200,3 @@ def confirmReservation(request):
             return Response({'__all__': 'Successful update'})
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['GET'])
-def get_data(request):
-    if request.method == 'GET':
-        rastras = Rastra.objects.all()
-        serializer = RatraSerializers(rastras, many=True)
-        return Response(serializer.data)
