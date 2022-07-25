@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
+class Type(models.IntegerChoices):
+    CUSTOMER = 1
+    SUPPLIER = 2
+    ADMIN = 3
+
+
 class User(AbstractUser):
-    class Type(models.IntegerChoices):
-        CUSTOMER = 1
-        SUPPLIER = 2
-        ADMIN = 3
     type = models.IntegerField(choices=Type.choices, default=3, verbose_name='Type')
     phone_number = models.CharField(max_length=10, verbose_name='Phone Number')
     city = models.CharField(max_length=200, verbose_name="City")

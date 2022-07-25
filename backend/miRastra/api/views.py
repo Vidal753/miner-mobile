@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AnonymousUser
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
-
+from django.core.exceptions import PermissionDenied
 from miRastra.models import Rastra
 from .serializers import *
 from django.http import JsonResponse
@@ -12,7 +12,26 @@ from rest_framework import status
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView as BaseTokenObtainPairView
+
+
+class TokenObtainPairView(BaseTokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        token_serializer = TokenObtainPairSerializer(data=data)
+        token_serializer.is_valid(raise_exception=True)
+
+        token_data = token_serializer.validated_data
+        return Response(token_data)
+
+
+@api_view(['POST'])
+def register_view(request):
+    serializer = UserSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+
+    return Response({'success': 'Su cuenta ha sido creada exitosamente'})
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -37,36 +56,6 @@ def get_tokens_for_user(user):
         'refresh': str(refresh),
         'access': str(refresh.access_token),
     }
-
-
-@api_view(['POST'])
-def login(request):
-    username = request.data['username']
-    password = request.data['password']
-    error = {}
-    if username == '':
-        error["username"] = "Este campo no puede estar en blanco."
-        if password == '':
-            error["password"] = "Este campo no puede estar en blanco."
-    if error != {}:
-        print(error)
-        return Response(error, status=status.HTTP_400_BAD_REQUEST)
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        token = get_tokens_for_user(user)
-        serializer = UserSerializers(user)
-        return Response({"user": serializer.data, "token": token}, status=status.HTTP_200_OK)
-    return Response({"__all__": "El usuario no existe"}, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['POST'])
-def register(request):
-    if request.method == 'POST':
-        serializer = CreateUserSerializers(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'__all__': 'Successful Register'}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
