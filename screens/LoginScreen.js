@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, ScrollView, StyleSheet, Alert, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, ScrollView, StyleSheet, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
@@ -8,21 +8,34 @@ import { colors } from '../constant/colors';
 import Text from '../components/Text';
 import TouchableText from '../components/TouchableText';
 import Separator from '../components/Separator';
+import api from '../api/api';
 
 export default function ({ navigation }) {
   const dispatch = useDispatch();
   const color = { ...colors };
-  const user = useSelector((reducer) => reducer.auth.type);
+  const user = useSelector((reducer) => reducer.auth.access);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const styles = makeStyle();
 
-  function test() {
-    dispatch({
-      type: LOGIN,
-      payload: {
-        user_name: 'carlos',
-        type: 3,
+  function login() {
+    api.sendData(
+      'api/login/',
+      { username, password },
+      (response) => {
+        dispatch({
+          type: LOGIN,
+          payload: {
+            ...response,
+            username,
+            password,
+          },
+        });
       },
-    });
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   return (
@@ -42,11 +55,22 @@ export default function ({ navigation }) {
           <Text title={'BIENVENIDO!'} />
           <Separator width={75} />
         </View>
-        <TextInput error={''} info={''} placeholder={'Nombre de Usario'} />
-        <TextInput error={''} info={''} placeholder={'Contraseña'} securityEntry />
+        <TextInput
+          error={''}
+          info={''}
+          placeholder={'Nombre de Usario'}
+          onChangeText={(text) => setUsername(text)}
+        />
+        <TextInput
+          error={''}
+          info={''}
+          placeholder={'Contraseña'}
+          securityEntry
+          onChangeText={(text) => setPassword(text)}
+        />
         <TouchableText title={'¿Olvidaste tu Contraseña?'} />
         <View style={styles.buttonAlign}>
-          <Button title={'Iniciar'} onPress={() => test()} />
+          <Button title={'Iniciar'} onPress={() => login()} />
           <Button
             title={'Registrarse'}
             register

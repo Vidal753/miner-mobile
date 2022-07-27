@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
+import rastra from './rastra';
 
 const appReducer = combineReducers({
   auth,
+  rastra,
 });
 
 const rootReducer = (state, action) => {

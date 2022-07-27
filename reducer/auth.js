@@ -1,6 +1,7 @@
 const initialState = {
   id: null,
-  user_name: null,
+  username: null,
+  password: null,
   first_name: null,
   last_name: null,
   email: null,

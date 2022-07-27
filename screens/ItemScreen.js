@@ -15,15 +15,16 @@ import DefineText from '../components/DefineText';
 import EditRastraModal from '../components/RastraModal';
 import SimpleAlert from '../components/SimpleAlert';
 import Button from '../components/Button';
+import api from '../api/api';
 
 let active = false;
 
 export default function ({ route }) {
-  const { supplier } = route.params;
-  console.log(supplier);
+  const { supplier, id } = route.params;
   const color = { ...colors };
   const styles = makeStyle(color);
   const [visible, setVisible] = useState(false);
+  const [rastra, setRatras] = useState({});
   const item = {
     active: false,
     state: 'Ocupada',
@@ -36,6 +37,7 @@ export default function ({ route }) {
       'Rastra con camaras de suguridad, vigilancia las 24 hora del dia trabajo de calidad con buen vigilancia las 24 hora del dia trabajo de calidad con buen vigilancia las 24 hora del dia trabajo de calidad con buen' +
       'rendimiento de oro, con una gran capacidad de molienda.description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :',
   };
+
   const { description } = item;
   const [size, setSize] = useState(0);
   const [title, setTitle] = useState('Ver más...');

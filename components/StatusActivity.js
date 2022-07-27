@@ -6,8 +6,13 @@ import { colors } from '../constant/colors';
 
 export default function ({ status = {}, horizontal = false }) {
   const color = { ...colors };
+  let state = '';
   const styles = makeStyle(horizontal);
-
+  if (status.state) {
+    state = status.state;
+  } else {
+    state = status.is_active ? 'Disponible' : 'Ocupado';
+  }
   return (
     <View style={styles.container}>
       <View style={styles.status}>
@@ -15,14 +20,14 @@ export default function ({ status = {}, horizontal = false }) {
           name="circle"
           size={15}
           color={
-            status.active
+            status.is_active
               ? color.green
-              : status.state === 'Ocupado' || status.state === 'Cancelado'
+              : state === 'Ocupado' || status.state === 'Cancelado'
               ? color.red
               : color.orange
           }
         />
-        <Text style={styles.text}>{status.state}</Text>
+        <Text style={styles.text}>{state}</Text>
       </View>
       {status.active === false && status.time !== '' && (
         <Text

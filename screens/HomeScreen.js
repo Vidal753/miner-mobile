@@ -1,50 +1,32 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, ScrollView, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  RefreshControl,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
 import CardItem from '../components/CardItem';
 import { colors } from '../constant/colors';
 import TextInput from '../components/TextInput';
 import Text from '../components/Text';
+import api from '../api/api';
+import { SET_RASTRAS } from '../reducer/rastra';
 
 export default function ({ navigation }) {
   const color = { ...colors };
   const styles = makeStyle(color);
-  const status = [
-    {
-      active: false,
-      state: 'Ocupado',
-      time: '',
-      name: 'Larry Siles',
-      price: '1500',
-      stars: 5,
-    },
-    {
-      active: true,
-      state: 'Disponible',
-      time: '',
-      name: 'Selvin Altamirano',
-      price: '1500',
-      stars: 3,
-    },
-    {
-      active: false,
-      state: 'Ocupado',
-      time: '',
-      name: 'Carlos Hernandez',
-      price: '1500',
-      stars: 4,
-    },
-    {
-      active: true,
-      state: 'Disponible',
-      time: '',
-      name: 'Abraham Ardila',
-      price: '1400',
-      stars: 1,
-    },
-  ];
-  const [filterData, setFilterData] = useState(status);
+  const dispatch = useDispatch();
+  const rastras = useSelector((reducer) => reducer.rastra.rastras);
+  const [filterData, setFilterData] = useState(rastras);
+  const active = filterData.filter((status) => status.is_active === true);
+  const inactive = filterData.filter((status) => status.is_active === false);
+  const [refreshing, setRefreshing] = useState(false);
+
   const [filterActive, setFilterActive] = useState(false);
   const leftValue = useState(new Animated.Value(500))[0];
   const value = useState(new Animated.Value(0))[0];
@@ -76,21 +58,58 @@ export default function ({ navigation }) {
     }
   }
 
-  const active = filterData.filter((status) => status.active === true);
-  const inactive = filterData.filter((status) => status.active === false);
-
   const searchFilterFunction = (text) => {
     if (text) {
-      const newData = status.filter((item) => {
+      const newData = rastras.filter((item) => {
         const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
       setFilterData(newData);
     } else {
-      setFilterData(status);
+      setFilterData(rastras);
     }
   };
+
+  useEffect(() => {
+    setRefreshing(true);
+    api.sendData(
+      'api/rastra/',
+      {},
+      (data) => {
+        dispatch({
+          type: SET_RASTRAS,
+          payload: data,
+        });
+        setFilterData(data);
+        setRefreshing(false);
+      },
+      (error) => {
+        setRefreshing(false);
+        console.log(error);
+      }
+    );
+  }, []);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    api.sendData(
+      'api/rastra/',
+      {},
+      (data) => {
+        dispatch({
+          type: SET_RASTRAS,
+          payload: data,
+        });
+        setFilterData(data);
+        setRefreshing(false);
+      },
+      (error) => {
+        setRefreshing(false);
+        console.log(error);
+      }
+    );
+  }, []);
 
   return (
     <View>
@@ -131,7 +150,9 @@ export default function ({ navigation }) {
           />
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {/* eslint-disable-next-line react/style-prop-object */}
         <StatusBar style={'light'} />
 
@@ -140,7 +161,7 @@ export default function ({ navigation }) {
             key={index}
             status={state}
             onPress={() => {
-              navigation.navigate('Item', { supplier: false });
+              navigation.navigate('Item', { supplier: false, id: state.id });
             }}
           />
         ))}
@@ -149,7 +170,7 @@ export default function ({ navigation }) {
             key={index}
             status={state}
             onPress={() => {
-              navigation.navigate('Item', { supplier: false });
+              navigation.navigate('Item', { supplier: false, id: state.id });
             }}
           />
         ))}

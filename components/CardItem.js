@@ -41,7 +41,7 @@ const makeStyle = (color, status) => {
       height: 120,
       width: wp(100),
       padding: 5,
-      backgroundColor: status.active ? color.background : color.shadow,
+      backgroundColor: status.is_active ? color.background : color.shadow,
     },
     imageStyle: {
       width: '35%',

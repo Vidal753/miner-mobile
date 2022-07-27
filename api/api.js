@@ -1,13 +1,14 @@
 import axios from 'axios';
+import consumer, { host } from './consumer';
 
 export default {
   https() {
-    return `http://127.0.0.1:8000`;
+    return `http://${host}`;
   },
-  getRatras(data, callback, handler) {
-    axios
+  sendData(url, data, callback, handler) {
+    consumer
       .request({
-        url: `http://127.0.0.1:8000/api/rastra/`,
+        url: `${this.https()}${url}`,
         method: 'POST',
         data,
       })
