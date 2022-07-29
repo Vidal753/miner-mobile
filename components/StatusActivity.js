@@ -20,7 +20,7 @@ export default function ({ status = {}, horizontal = false }) {
           name="circle"
           size={15}
           color={
-            status.is_active
+            status.is_active || status.state === 'Activa'
               ? color.green
               : state === 'Ocupado' || status.state === 'Cancelado'
               ? color.red

@@ -27,7 +27,7 @@ export default function ({ status = {} }) {
           <StatusActivity status={status} />
           <Text style={styles.primaryText}>{status.name}</Text>
           <DefineText title={'Cantidad'} description={`${status.amount}T`} />
-          {status.finish !== '' && (
+          {status.finish !== null && (
             <DefineText title={'Finaliza'} description={`${status.finish}`} />
           )}
         </View>

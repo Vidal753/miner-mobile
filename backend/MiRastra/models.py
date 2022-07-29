@@ -91,12 +91,12 @@ class Rating(models.Model):
 
 class Reservation(models.Model):
     PENDING = 'Pendiente...'
-    ACTIVE = 'Activo'
+    ACTIVE = 'Activa'
     FINISH = 'Finalizado'
     CANCELLED = 'Cancelado'
     RESERVATION_STATES = [
         (PENDING, 'Pendiente...'),
-        (ACTIVE, 'Activo'),
+        (ACTIVE, 'Activa'),
         (FINISH, 'Finalizado'),
         (CANCELLED, 'Cancelado'),
     ]

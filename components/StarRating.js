@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableWithoutFeedback, Animated } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 
-export default function ({ active = false, star = 1, size = 18 }) {
-  const [value, setValue] = useState(star);
+export default function ({ active = false, star, size = 18, onChangeValue }) {
+  const [value, setValue] = useState(1);
+  useEffect(() => {
+    setValue(star);
+  }, [star]);
   const numStars = 5;
   let stars = [];
 
@@ -15,6 +18,7 @@ export default function ({ active = false, star = 1, size = 18 }) {
         key={i}
         onPress={() => {
           setValue(i);
+          onChangeValue(i);
         }}>
         <Animated.View>
           <Star filled={i <= value} size={size} />

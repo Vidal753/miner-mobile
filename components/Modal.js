@@ -6,12 +6,28 @@ import Button from './Button';
 import Text from './Text';
 import TextInput from './TextInput';
 import SimpleAlert from './SimpleAlert';
+import api from '../api/api';
 
-export default function () {
+export default function ({ id }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [modalVisible, setModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [phone_number, setPhone_number] = useState('');
+  const [amount, setAmount] = useState(0);
+
+  const makeReservation = () => {
+    api.sendData(
+      'api/reservation/',
+      { rastra: id, amount, phone_number },
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
 
   return (
     <View>
@@ -37,6 +53,9 @@ export default function () {
               info={''}
               placeholder={'Toneladas'}
               keyboardType={'number-pad'}
+              onChangeText={(amount) => {
+                setAmount(amount);
+              }}
               containerSimpleTextInput={{ width: 150 }}
               text={styles.textInputText}
             />
@@ -44,18 +63,10 @@ export default function () {
             <TextInput
               error={''}
               info={''}
+              onChangeText={(number) => setPhone_number(number)}
               keyboardType={'phone-pad'}
               placeholder={'5676-9999'}
               containerSimpleTextInput={{ width: 150 }}
-              text={styles.textInputText}
-            />
-            <Text title={'Cédula'} type={2} />
-            <TextInput
-              error={''}
-              info={''}
-              keyboardType={'number-pad'}
-              placeholder={'Digite su cédula'}
-              containerSimpleTextInput={{ width: 180 }}
               text={styles.textInputText}
             />
             <SimpleAlert
@@ -69,7 +80,13 @@ export default function () {
               visible={visible}
               onPress={() => setModalVisible(!modalVisible)}
             />
-            <Button title={'Confirmar'} onPress={() => setVisible(!visible)} />
+            <Button
+              title={'Confirmar'}
+              onPress={() => {
+                makeReservation();
+                setVisible(!visible);
+              }}
+            />
           </View>
         </View>
       </Modal>

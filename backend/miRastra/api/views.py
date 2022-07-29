@@ -22,6 +22,7 @@ class TokenObtainPairView(BaseTokenObtainPairView):
         token_serializer.is_valid(raise_exception=True)
 
         token_data = token_serializer.validated_data
+        token_data['type'] = 1
         return Response(token_data)
 
 
@@ -166,12 +167,13 @@ def reservation_list(request):
         serializer = ReservationSerializers(reservation, many=True)
         return Response(serializer.data)
     data["user"] = user.id
-    if request.method == 'POST':
+    if data['phone_number'] == user.phone_number:
         serializer = ReservationSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"detail": "El número teléfonico no coincide con el registrado"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])

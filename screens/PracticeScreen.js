@@ -9,6 +9,7 @@ import {
   PanResponder,
 } from 'react-native';
 import { colors } from '../constant/colors';
+import Button from '../components/Button';
 
 function Funtion1() {
   const color = { ...colors };
@@ -195,12 +196,34 @@ function Function5() {
   );
 }
 
+const Pratica = () => {
+  const styles = makeStyle();
+  const [number, setNumber] = useState(0);
+  return (
+    <View style={styles.container}>
+      <View>
+        <Text>{number}</Text>
+        <Button
+          title={'+'}
+          onPress={() => {
+            setNumber(number + 1);
+          }}
+        />
+      </View>
+    </View>
+  );
+};
+
 export default function () {
-  return <Funtion1 />;
+  return <Pratica />;
 }
 
-const makeStyle = (color) => {
+const makeStyle = () => {
   return StyleSheet.create({
-    container: {},
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
   });
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, Image } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -25,30 +25,36 @@ export default function ({ route }) {
   const styles = makeStyle(color);
   const [visible, setVisible] = useState(false);
   const [rastra, setRatras] = useState({});
-  const item = {
-    active: false,
-    state: 'Ocupada',
-    time: '3:00',
-    name: 'Larry Siles',
-    stars: 5,
-    price: 1400,
-    amount: 4,
-    description:
-      'Rastra con camaras de suguridad, vigilancia las 24 hora del dia trabajo de calidad con buen vigilancia las 24 hora del dia trabajo de calidad con buen vigilancia las 24 hora del dia trabajo de calidad con buen' +
-      'rendimiento de oro, con una gran capacidad de molienda.description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :description.length > 220 ? `${description.substring(0, 220)}...` :',
-  };
 
-  const { description } = item;
-  const [size, setSize] = useState(0);
+  useEffect(() => {
+    api.sendData(
+      'api/rastra/detail',
+      { id },
+      (data) => {
+        setRatras(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, [id]);
+  const [size, setSize] = useState(35);
   const [title, setTitle] = useState('Ver más...');
-
+  let description = '';
+  let owner = '';
+  if (rastra.description) {
+    description = rastra.description;
+  }
+  if (rastra.propietario) {
+    owner = rastra.propietario[0] + ' ' + rastra.propietario[1];
+  }
   function showText() {
     active = !active;
     if (active) {
       setSize(description.length);
       setTitle('Ver menos...');
     } else {
-      setSize(0);
+      setSize(35);
       setTitle('Ver más...');
     }
   }
@@ -63,18 +69,18 @@ export default function ({ route }) {
         />
       </View>
       <View style={styles.container}>
-        <StatusActivity status={item} horizontal />
+        <StatusActivity status={rastra} horizontal />
         <View style={styles.principalInformation}>
-          <Text style={styles.primaryText}>{item.name}</Text>
-          <StarRating star={item.stars} size={24} />
+          <Text style={styles.primaryText}>{rastra.name}</Text>
+          <StarRating star={rastra.stars} size={24} />
         </View>
         <Separator width={90} />
         <ScrollView>
-          <DefineText title={'Propietario'} description={'Larry Siles'} />
-          <DefineText title={'Precio'} description={`C$${item.price} por hora.`} />
-          <DefineText title={'Capacidad'} description={`${item.amount}T.`} />
+          <DefineText title={'Propietario'} description={owner} />
+          <DefineText title={'Precio'} description={`C$${rastra.price}.`} />
+          <DefineText title={'Capacidad'} description={`${rastra.amount}T.`} />
           <DefineText title={'Dirección'} description={``} />
-          <Text style={styles.secondText}>{`De la iglesia la bola media cuadra al sur.`}</Text>
+          <Text style={styles.secondText}>{rastra.direction}</Text>
           <DefineText title={'Descripción'} description={``} />
           <Text style={[styles.secondText, { paddingVertical: 0 }]}>
             {description.length > size ? `${description.substring(0, size)}...` : description}
@@ -108,8 +114,8 @@ export default function ({ route }) {
             </View>
           ) : (
             <View style={styles.buttonArea}>
-              <Modal />
-              <RatingSheet />
+              <Modal id={id} />
+              <RatingSheet id={id} />
             </View>
           )}
         </ScrollView>

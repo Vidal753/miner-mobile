@@ -31,7 +31,7 @@ export default function ({ navigation }) {
   const leftValue = useState(new Animated.Value(500))[0];
   const value = useState(new Animated.Value(0))[0];
 
-  function move() {
+  function showSearchBar() {
     setFilterActive(!filterActive);
     if (!filterActive) {
       Animated.timing(leftValue, {
@@ -71,8 +71,7 @@ export default function ({ navigation }) {
     }
   };
 
-  useEffect(() => {
-    setRefreshing(true);
+  const listRastra = () => {
     api.sendData(
       'api/rastra/',
       {},
@@ -89,26 +88,16 @@ export default function ({ navigation }) {
         console.log(error);
       }
     );
+  };
+
+  useEffect(() => {
+    setRefreshing(true);
+    listRastra();
   }, []);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    api.sendData(
-      'api/rastra/',
-      {},
-      (data) => {
-        dispatch({
-          type: SET_RASTRAS,
-          payload: data,
-        });
-        setFilterData(data);
-        setRefreshing(false);
-      },
-      (error) => {
-        setRefreshing(false);
-        console.log(error);
-      }
-    );
+    listRastra();
   }, []);
 
   return (
@@ -141,7 +130,7 @@ export default function ({ navigation }) {
         </Animated.View>
         <TouchableOpacity
           onPress={() => {
-            move();
+            showSearchBar();
           }}>
           <Ionicons
             name="search-circle"
