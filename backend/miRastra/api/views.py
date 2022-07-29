@@ -22,7 +22,6 @@ class TokenObtainPairView(BaseTokenObtainPairView):
         token_serializer.is_valid(raise_exception=True)
 
         token_data = token_serializer.validated_data
-        token_data['type'] = 1
         return Response(token_data)
 
 

@@ -14,9 +14,8 @@ export default function ({ route }) {
   const [refreshing, setRefreshing] = useState(false);
 
   const sendData = () => {
-    api.sendData(
+    api.listData(
       'api/reservation/',
-      {},
       (data) => {
         dispatch({
           type: SET_RESERVATION,

@@ -15,6 +15,7 @@ const Tab = createBottomTabNavigator();
 export default function () {
   return (
     <Tab.Navigator
+      initialRouteName={'ItemNavigation'}
       screenOptions={{
         header: (props) => <Header {...props} />,
         tabBarShowLabel: false,

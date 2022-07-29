@@ -15,4 +15,14 @@ export default {
       .then((response) => callback(response.data))
       .catch((error) => handler(error.response.data));
   },
+  listData(url, callback, handler) {
+    consumer
+      .request({
+        url: `${this.https()}${url}`,
+        method: 'POST',
+        data: {},
+      })
+      .then((response) => callback(response.data))
+      .catch((error) => handler(error.response.data));
+  },
 };

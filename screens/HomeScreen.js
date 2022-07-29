@@ -72,9 +72,8 @@ export default function ({ navigation }) {
   };
 
   const listRastra = () => {
-    api.sendData(
+    api.listData(
       'api/rastra/',
-      {},
       (data) => {
         dispatch({
           type: SET_RASTRAS,
