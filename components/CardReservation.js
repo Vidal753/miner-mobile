@@ -11,10 +11,11 @@ import DefineText from './DefineText';
 import EditReservationModal from '../components/EditReservationModal';
 import SimpleAlert from './SimpleAlert';
 
-export default function ({ status = {} }) {
+export default function ({ status = {}, onPress, update }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [visible, setVisible] = useState(false);
+
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', height: '70%' }}>
@@ -35,7 +36,7 @@ export default function ({ status = {} }) {
       <View style={styles.buttonArea}>
         {status.state === 'Pendiente...' && (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <EditReservationModal />
+            <EditReservationModal update={update} id={status.id} />
             <Button
               title={'Eliminar'}
               container={{ height: 30, marginLeft: 5 }}
@@ -55,7 +56,7 @@ export default function ({ status = {} }) {
             setVisible(visible);
           }}
           visible={visible}
-          onPress={() => {}}
+          onPress={onPress}
         />
       </View>
     </View>

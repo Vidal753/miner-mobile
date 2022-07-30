@@ -13,6 +13,18 @@ export default function ({ route }) {
   const styles = makeStyle();
   const [refreshing, setRefreshing] = useState(false);
 
+  function deleteReservation(id) {
+    setRefreshing(true);
+    api.deleteData(
+      'api/reservation/detail',
+      { id },
+      (data) => console.log(data),
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   const sendData = () => {
     api.listData(
       'api/reservation/',
@@ -31,9 +43,8 @@ export default function ({ route }) {
   };
 
   useEffect(() => {
-    setRefreshing(true);
     sendData();
-  }, []);
+  }, [refreshing]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -56,7 +67,12 @@ export default function ({ route }) {
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       <View style={styles.container}>
         {reservation.map((value, index) => (
-          <CardReservation key={index} status={value} />
+          <CardReservation
+            key={index}
+            status={value}
+            onPress={() => deleteReservation(value.id)}
+            update={(refresh) => setRefreshing(refresh)}
+          />
         ))}
       </View>
     </ScrollView>

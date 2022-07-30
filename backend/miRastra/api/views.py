@@ -125,6 +125,17 @@ def get_user(request):
     return Response(serializer.data)
 
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_user(request):
+    user = request.user
+    serializer = UserSerializers(user, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'__all__': 'Successful update'})
+    return Response(serializer.errors)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def rating_list(request):
@@ -152,7 +163,7 @@ def create_rating(request):
         serializer = RatingSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
+            return Response({'detail': 'Successful save'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -170,14 +181,14 @@ def reservation_list(request):
         serializer = ReservationSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'__all__': 'Successful save'}, status=status.HTTP_201_CREATED)
+            return Response({'detail': 'Successful save'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response({"detail": "El número teléfonico no coincide con el registrado"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT'])
+@api_view(['PUT', 'DElETE'])
 @permission_classes([IsAuthenticated])
-def confirmReservation(request):
+def reservation_detail(request):
     data = request.data
     try:
         reservation = Reservation.objects.get(pk=data["id"])
@@ -187,6 +198,8 @@ def confirmReservation(request):
         serializer = ReservationSerializers(reservation, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'__all__': 'Successful update'})
-
+            return Response({'detail': 'Successful update'})
+    elif request.method == 'DELETE':
+        reservation.delete()
+        return Response({'detail': 'Successful delete'})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

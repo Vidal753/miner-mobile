@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LOG_OUT } from '../reducer/auth';
 import ProfileButton from '../components/ProfileButton';
 import { colors } from '../constant/colors';
@@ -10,6 +10,7 @@ import PasswordModal from '../components/PasswordModal';
 export default function ({ navigation }) {
   const color = { ...colors };
   const dispatch = useDispatch();
+  const type = useSelector((reducer) => reducer.auth.type);
   const styles = makeStyle();
   const log_out = () => {
     dispatch({
@@ -26,16 +27,20 @@ export default function ({ navigation }) {
           MyRatingScreen
           onPress={() => navigation.navigate('PersonalInformationScreen')}
         />
-        <ProfileButton
-          title={'Mis Rastras'}
-          icon={'arrow-redo'}
-          onPress={() => navigation.navigate('MyRastraScreen')}
-        />
-        <ProfileButton
-          title={'Mis Reseñas'}
-          icon={'star'}
-          onPress={() => navigation.navigate('MyRatingScreen')}
-        />
+        {type === 2 && (
+          <ProfileButton
+            title={'Mis Rastras'}
+            icon={'arrow-redo'}
+            onPress={() => navigation.navigate('MyRastraScreen')}
+          />
+        )}
+        {type === 2 && (
+          <ProfileButton
+            title={'Mis Reseñas'}
+            icon={'star'}
+            onPress={() => navigation.navigate('MyRatingScreen')}
+          />
+        )}
         <ProfileButton
           title={'Mis Reservaciones'}
           icon={'file-tray'}

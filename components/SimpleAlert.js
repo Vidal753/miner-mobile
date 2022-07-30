@@ -44,10 +44,7 @@ export default function ({
                   register
                   container={{ height: 35, marginRight: 40 }}
                   size={8}
-                  onPress={() => {
-                    onPress();
-                    changeVisible(!visible);
-                  }}
+                  onPress={() => changeVisible(!visible)}
                 />
                 <Button
                   fontSize={2.4}

@@ -8,7 +8,14 @@ import { colors } from '../constant/colors';
 import Text, { SMALL } from './Text';
 import TextInput from './TextInput';
 
-export default function ({ security = false, title = '', placeholder = '', type = 1 }) {
+export default function ({
+  security = false,
+  title = '',
+  placeholder = '',
+  type = 1,
+  value,
+  onChangeText,
+}) {
   const color = { ...colors };
   const styles = makeStyle(color);
 
@@ -23,6 +30,8 @@ export default function ({ security = false, title = '', placeholder = '', type 
             securityEntry={security}
             placeholder={placeholder}
             containerSimpleTextInput={styles.textInput}
+            value={value}
+            onChangeText={onChangeText}
           />
         </View>
       );

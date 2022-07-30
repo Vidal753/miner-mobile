@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Platform, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { useDispatch, useSelector } from 'react-redux';
 import ItemNavigation from './ItemNavigation';
 import ProfileNavigation from './ProfileNavigation';
 import Header from '../components/Header';
@@ -10,9 +11,27 @@ import NotificationScreen from '../screens/NotificationScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import { colors } from '../constant/colors';
 import Text from '../components/Text';
+import api from '../api/api';
+import { LOGIN } from '../reducer/auth';
 
 const Tab = createBottomTabNavigator();
+
 export default function () {
+  const dispatch = useDispatch();
+  const type = useSelector((reducer) => reducer.auth.type);
+  api.listData(
+    'api/user/',
+    (data) => {
+      dispatch({
+        type: LOGIN,
+        payload: data,
+      });
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+
   return (
     <Tab.Navigator
       initialRouteName={'ItemNavigation'}
@@ -72,24 +91,26 @@ export default function () {
           ),
         }}
       />
-      <Tab.Screen
-        name={'NotificationScreen'}
-        component={NotificationScreen}
-        options={{
-          title: 'NOTIFICACIONES',
-          tabBarIcon: ({ focused }) => (
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
-              {focused ? (
-                <Ionicons name="notifications" size={30} color={colors.primary} />
-              ) : (
-                <Ionicons name="notifications-outline" size={30} color={colors.primary} />
-              )}
-              <Text title={'Notificación'} type={2} style={{ fontSize: hp(1.3) }} />
-            </View>
-          ),
-        }}
-      />
+      {type === 2 && (
+        <Tab.Screen
+          name={'NotificationScreen'}
+          component={NotificationScreen}
+          options={{
+            title: 'NOTIFICACIONES',
+            tabBarIcon: ({ focused }) => (
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                {Platform.OS === 'ios' && <Text style={{ marginTop: 10 }} />}
+                {focused ? (
+                  <Ionicons name="notifications" size={30} color={colors.primary} />
+                ) : (
+                  <Ionicons name="notifications-outline" size={30} color={colors.primary} />
+                )}
+                <Text title={'Notificación'} type={2} style={{ fontSize: hp(1.3) }} />
+              </View>
+            ),
+          }}
+        />
+      )}
       <Tab.Screen
         name={'ProfileNavigation'}
         component={ProfileNavigation}

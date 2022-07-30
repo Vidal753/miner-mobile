@@ -12,10 +12,11 @@ urlpatterns = [
     path('rastra/detail', rastra_detail),
     path('rastra/detail/supplier', get_supplier_rastras),
     path('user/', get_user),
+    path('user/update', update_user),
     path('rating/', rating_list),
     path('rating/create', create_rating),
     path('reservation/', reservation_list),
-    path('reservation/confirm', confirmReservation),
+    path('reservation/detail', reservation_detail),
     path('register/', register_view),
     path('login/', TokenObtainPairView.as_view()),
 

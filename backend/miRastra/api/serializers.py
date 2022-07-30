@@ -123,6 +123,7 @@ class UserSerializers(serializers.ModelSerializer):
         model = User
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'city', 'amount_rastra',
                   'type']
+        extra_kwargs = {'city': {'required': False}, 'first_name': {'required': True}}
 
     def validate(self, attrs):
         if attrs == '':

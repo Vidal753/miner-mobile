@@ -10,14 +10,23 @@ import Button from './Button';
 import Text from './Text';
 import TextInput from './TextInput';
 import SimpleAlert from './SimpleAlert';
-import ProfileButton from './ProfileButton';
-import Separator from './Separator';
+import api from '../api/api';
 
-export default function () {
+export default function ({ id, update }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [modalVisible, setModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [amount, setAmount] = useState(0);
+
+  function update_reservation() {
+    api.updateData(
+      'api/reservation/detail',
+      { id, amount },
+      (data) => console.log(data),
+      (error) => console.log(error)
+    );
+  }
 
   return (
     <View>
@@ -42,9 +51,9 @@ export default function () {
               error={''}
               info={''}
               placeholder={'Escribar la cantidad'}
+              onChangeText={(text) => setAmount(text)}
               containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
             />
-            <Separator width={80} />
             <SimpleAlert
               description={'Se edito correctamente su reservación.'}
               buttonTitle={'OK'}
@@ -56,10 +65,14 @@ export default function () {
             />
             <View style={{ alignItems: 'center' }}>
               <Button
-                title={'Guardar Cambios'}
-                onPress={() => setVisible(!visible)}
+                title={'Guardar'}
+                onPress={() => {
+                  update_reservation();
+                  update(true);
+                  setVisible(!visible);
+                }}
                 fontSize={2.5}
-                size={16}
+                size={9}
               />
             </View>
           </View>
