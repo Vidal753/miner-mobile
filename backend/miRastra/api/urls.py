@@ -17,6 +17,7 @@ urlpatterns = [
     path('rating/create', create_rating),
     path('reservation/', reservation_list),
     path('reservation/detail', reservation_detail),
+    path('notification/', notification_list),
     path('register/', register_view),
     path('login/', TokenObtainPairView.as_view()),
 

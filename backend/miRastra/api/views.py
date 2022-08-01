@@ -203,3 +203,18 @@ def reservation_detail(request):
         reservation.delete()
         return Response({'detail': 'Successful delete'})
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def notification_list(request):
+    user = request.user
+    rastras = user.rastra_set.all()
+    notification = []
+    for rastra in rastras:
+        notifications = rastra.reservation_set.all()
+        for value in notifications:
+            notification.append(value)
+    print(notification)
+    serializer = ReservationSerializers(notification, many=True)
+    return Response(serializer.data)
