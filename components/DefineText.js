@@ -3,9 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { colors } from '../constant/colors';
 
-export default function ({ title, description }) {
+export default function ({ title, description, padding }) {
   const color = { ...colors };
-  const styles = makeStyle(color);
+  const styles = makeStyle(color, padding);
   return (
     <View style={styles.container}>
       <Text style={styles.secondText}>{`${title}: `}</Text>
@@ -17,11 +17,11 @@ export default function ({ title, description }) {
     </View>
   );
 }
-const makeStyle = (color) => {
+const makeStyle = (color, padding) => {
   return StyleSheet.create({
     container: {
       flexDirection: 'row',
-      paddingVertical: 1,
+      paddingVertical: padding ? padding : 3,
     },
     secondText: {
       color: color.medium_black,

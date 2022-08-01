@@ -57,7 +57,7 @@ export default function ({ route }) {
     );
   } else {
     reservation = reservations.filter(
-      (reservation) => reservation.state !== 'Pendiente...' && reservation.state !== 'Activa'
+      (reservation) => reservation.state !== 'Pendiente' && reservation.state !== 'Activa'
     );
   }
 

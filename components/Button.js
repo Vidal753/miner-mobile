@@ -10,12 +10,13 @@ export default function ({
   register = false,
   container = {},
   fontSize = 2.5,
+  disabled = false,
 }) {
   const color = { ...colors };
   const styles = makeStyle(color, size, register, container, fontSize);
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress} disabled={disabled}>
       <Text style={styles.primaryText}>{title}</Text>
     </TouchableOpacity>
   );

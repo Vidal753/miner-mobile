@@ -8,7 +8,7 @@ import SimpleAlert from './SimpleAlert';
 import Separator from './Separator';
 import InputText from './InputText';
 
-export default function ({ title = '', alertTitle = '', buttonTitle = '' }) {
+export default function ({ title = '', alertTitle = '', buttonTitle = '', disable = false }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [modalVisible, setModalVisible] = useState(false);

@@ -55,7 +55,7 @@ export default function ({ route }) {
       setTitle('Ver menos...');
     } else {
       setSize(35);
-      setTitle('Ver más...');
+      setTitle('Ver más');
     }
   }
 
@@ -77,8 +77,10 @@ export default function ({ route }) {
         <Separator width={90} />
         <ScrollView>
           <DefineText title={'Propietario'} description={owner} />
-          <DefineText title={'Precio'} description={`C$${rastra.price}.`} />
-          <DefineText title={'Capacidad'} description={`${rastra.amount}T.`} />
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <DefineText title={'Precio'} description={`C$${rastra.price}.`} />
+            <DefineText title={'Capacidad'} description={`${rastra.amount}T.`} />
+          </View>
           <DefineText title={'Dirección'} description={``} />
           <Text style={styles.secondText}>{rastra.direction}</Text>
           <DefineText title={'Descripción'} description={``} />
@@ -109,12 +111,13 @@ export default function ({ route }) {
                 title={'Editar Rastra'}
                 alertTitle={'Se edito correctamente su Rastra.'}
                 buttonTitle={'Editar'}
+                disable
               />
               <Button title={'Eliminar'} onPress={() => setVisible(true)} />
             </View>
           ) : (
             <View style={styles.buttonArea}>
-              <Modal id={id} />
+              <Modal id={id} active={rastra.is_active} />
               <RatingSheet id={id} />
             </View>
           )}

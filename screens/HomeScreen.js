@@ -120,7 +120,7 @@ export default function ({ navigation }) {
           <TextInput
             error={''}
             info={''}
-            containerSimpleTextInput={{ width: 270, height: 40 }}
+            containerSimpleTextInput={{ width: 290, height: 40 }}
             placeholder={'Buscar'}
             onChangeText={(event) => {
               searchFilterFunction(event);

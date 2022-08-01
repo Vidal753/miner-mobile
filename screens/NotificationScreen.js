@@ -1,72 +1,65 @@
-import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { View, ScrollView, StyleSheet, RefreshControl } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { colors } from '../constant/colors';
 import CardNotification from '../components/CardNotification';
+import api from '../api/api';
+import { SET_NOTIFICATION } from '../reducer/rastra';
 
 export default function ({ route }) {
   let reservation = [];
+  const dispatch = useDispatch();
+  const notifications = useSelector((reducer) => reducer.rastra.notification);
+  const [refreshing, setRefreshing] = useState(false);
   const styles = makeStyle();
-  const reservations = [
-    {
-      user: 'Larry Siles',
-      active: false,
-      state: 'Pendiente...',
-      name: 'La Estrella',
-      amount: 10,
-      time: '',
-      finish: '',
-      total: 35000,
-      phone_number: '7876-9889',
-    },
-    {
-      user: 'Larry Siles',
-      active: false,
-      state: 'Pendiente...',
-      name: 'La Estrella',
-      amount: 10,
-      time: '',
-      finish: '',
-      total: 35000,
-      phone_number: '7876-9889',
-    },
-    {
-      user: 'Larry Siles',
-      active: false,
-      state: 'Pendiente...',
-      name: 'La Estrella',
-      amount: 10,
-      time: '',
-      finish: '',
-      total: 35000,
-      phone_number: '7876-9889',
-    },
-    {
-      user: 'Larry Siles',
-      active: false,
-      state: 'Pendiente...',
-      name: 'La Estrella',
-      amount: 10,
-      time: '',
-      finish: '',
-      total: 35000,
-      phone_number: '7876-9889',
-    },
-  ];
+
+  function list_notification() {
+    api.listData(
+      'api/notification/',
+      (data) => {
+        dispatch({
+          type: SET_NOTIFICATION,
+          payload: data,
+        });
+        setRefreshing(false);
+      },
+      (error) => {
+        console.log(error);
+        setRefreshing(false);
+      }
+    );
+  }
+
+  useEffect(() => {
+    list_notification();
+  }, [refreshing]);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    list_notification();
+  }, []);
+
   if (route.params === undefined) {
-    reservation = reservations.filter(
-      (reservation) => reservation.state !== 'Finalizado' && reservation.state !== 'Cancelado'
+    reservation = notifications.filter(
+      (notification) => notification.state !== 'Finalizado' && reservation.state !== 'Cancelado'
     );
   } else {
-    reservation = reservations.filter(
-      (reservation) => reservation.state !== 'Pendiente...' && reservation.state !== 'Activa'
+    reservation = notifications.filter(
+      (notification) => notification.state !== 'Pendiente' && reservation.state !== 'Activa'
     );
   }
 
   return (
-    <ScrollView style={{ backgroundColor: colors.background }}>
+    <ScrollView
+      style={{ backgroundColor: colors.background }}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       <View style={styles.container}>
         {reservation.map((value, index) => (
-          <CardNotification key={index} status={value} />
+          <CardNotification
+            key={index}
+            status={value}
+            reserve={(is_active) => setRefreshing(is_active)}
+          />
         ))}
       </View>
     </ScrollView>

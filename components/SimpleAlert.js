@@ -12,6 +12,7 @@ export default function ({
   onPress,
   error = false,
   visible = false,
+  information = false,
   changeVisible,
 }) {
   const color = { ...colors };
@@ -23,6 +24,8 @@ export default function ({
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             {error ? (
+              <AntDesign name="exclamationcircleo" size={100} color={color.red} />
+            ) : information ? (
               <AntDesign name="exclamationcircleo" size={100} color={color.red} />
             ) : (
               <Feather name="check-circle" size={100} color={color.green} />

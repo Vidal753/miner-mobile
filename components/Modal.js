@@ -8,11 +8,12 @@ import TextInput from './TextInput';
 import SimpleAlert from './SimpleAlert';
 import api from '../api/api';
 
-export default function ({ id }) {
+export default function ({ id, active }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [modalVisible, setModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [information, setInformation] = useState(false);
   const [phone_number, setPhone_number] = useState('');
   const [amount, setAmount] = useState(0);
 
@@ -90,7 +91,22 @@ export default function ({ id }) {
           </View>
         </View>
       </Modal>
-      <Button title={'Reservar'} onPress={() => setModalVisible(true)} />
+      <SimpleAlert
+        description={
+          'Esta rastra esta ocupada temporalmente, intente nuevamente cuando este disponible.'
+        }
+        buttonTitle={'OK'}
+        changeVisible={(visible) => {
+          setVisible(visible);
+        }}
+        visible={visible}
+        information
+        onPress={() => setVisible(!visible)}
+      />
+      <Button
+        title={'Reservar'}
+        onPress={() => (active ? setModalVisible(true) : setVisible(!information))}
+      />
     </View>
   );
 }
