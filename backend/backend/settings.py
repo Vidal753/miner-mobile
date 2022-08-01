@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-vwkk!42rv+z^^8=p3#dmjimmwi(91!_e!@3yurr56j(4g+n1he
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'oxford-nic.herokuapp.com']
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'miRastra.User'
 
@@ -92,8 +92,6 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 
     'corsheaders.middleware.CorsMiddleware',
 
@@ -175,6 +173,3 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS: True
-
-if os.getcwd() == '/app':
-   DEBUG = False
