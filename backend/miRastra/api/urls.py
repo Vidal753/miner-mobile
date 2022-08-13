@@ -10,7 +10,7 @@ urlpatterns = [
     path('', views.getRoutes),
     path('rastra/', rastra_list),
     path('rastra/detail', rastra_detail),
-    path('rastra/detail/supplier', get_supplier_rastras),
+    path('rastra/supplier', get_supplier_rastras),
     path('user/', get_user),
     path('user/update', update_user),
     path('rating/', rating_list),

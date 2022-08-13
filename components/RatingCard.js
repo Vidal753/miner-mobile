@@ -9,15 +9,16 @@ import StarRating from './StarRating';
 import Text from './Text';
 
 export default function ({ rating = {} }) {
+  const user_name = `${rating.user_name[0]} ${rating.user_name[1]}`;
   const color = { ...colors };
   const styles = makeStyle(color);
   return (
     <View style={styles.container}>
       <View style={{ width: '60%', paddingRight: 15 }}>
-        <Text title={rating.user} type={1} style={{ fontSize: hp(2.3) }} />
+        <Text title={user_name} type={1} style={{ fontSize: hp(2.3) }} />
         <Text title={`Rastra: ${rating.name}`} type={2} style={{ fontSize: hp(2) }} />
-        <ScrollView style={{ height: 200 }}>
-          <Text title={rating.comment.substring(0, 143)} style={styles.secondText} />
+        <ScrollView style={{ height: 200, paddingTop: 5 }}>
+          <Text title={rating.comment} style={styles.secondText} />
         </ScrollView>
       </View>
       <View
@@ -26,7 +27,7 @@ export default function ({ rating = {} }) {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <StarRating star={4} size={26} />
+        <StarRating star={rating.stars} size={26} />
         <View style={styles.imageContainer}>
           <Image
             source={require('../assets/images/arrastra.png')}
@@ -67,7 +68,7 @@ const makeStyle = (color) => {
     secondText: {
       color: color.medium_black,
       fontSize: hp(2),
-      textAlign: 'justify',
+      textAlign: 'left',
       paddingVertical: 2,
       fontFamily: 'gotham-book',
     },

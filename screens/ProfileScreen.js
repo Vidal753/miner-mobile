@@ -38,7 +38,7 @@ export default function ({ navigation }) {
           <ProfileButton
             title={'Mis Reseñas'}
             icon={'star'}
-            onPress={() => navigation.navigate('MyRatingScreen')}
+            onPress={() => navigation.navigate('MyRastraScreen', { rating: true })}
           />
         )}
         {type === 2 && (

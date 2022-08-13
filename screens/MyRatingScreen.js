@@ -1,55 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { colors } from '../constant/colors';
 import RatingCard from '../components/RatingCard';
+import api from '../api/api';
 
-export default function () {
+export default function ({ route }) {
+  const { id } = route.params;
   const color = { ...colors };
   const styles = makeStyle(color);
-  const rating = [
-    {
-      user: 'Vidal Baquedano',
-      name: 'La Estrella',
-      stars: 4,
-      comment:
-        'Me gusto mucho la atencion, Me gusto mucho la atencion, pero los trabajadores no saben como  tratar a los clientes y hasta faltan el respeto.',
-    },
-    {
-      user: 'Vidal Baquedano',
-      name: 'La Estrella',
-      stars: 4,
-      comment:
-        'Me gusto mucho la atencion, pero los trabajadores no saben como tratar a los clientes y hasta faltan el respeto.',
-    },
-    {
-      user: 'Vidal Baquedano',
-      name: 'La Estrella',
-      stars: 4,
-      comment:
-        'Me gusto mucho la atencion, pero los trabajadores no saben como tratar a los clientes y hasta faltan el respeto.',
-    },
-    {
-      user: 'Vidal Baquedano',
-      name: 'La Estrella',
-      stars: 4,
-      comment:
-        'Me gusto mucho la atencion, pero los trabajadores no saben como tratar a los clientes y hasta faltan el respeto.',
-    },
-    {
-      user: 'Vidal Baquedano',
-      name: 'La Estrella',
-      stars: 4,
-      comment:
-        'Me gusto mucho la atencion, pero los trabajadores no saben como tratar a los clientes y hasta faltan el respeto.',
-    },
-    {
-      user: 'Vidal Baquedano',
-      name: 'La Estrella',
-      stars: 4,
-      comment:
-        'Me gusto mucho la atencion, pero los trabajadores no saben como tratar a los clientes y hasta faltan el respeto.',
-    },
-  ];
+  const [rating, setRating] = useState([]);
+
+  const rating_list = () => {
+    api.sendData(
+      'api/rating/',
+      { id },
+      (data) => setRating(data),
+      (error) => console.log(error)
+    );
+  };
+
+  useEffect(() => {
+    rating_list();
+  }, []);
+
   return (
     <ScrollView style={{ backgroundColor: colors.background }}>
       <View style={styles.container}>

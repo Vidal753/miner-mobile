@@ -110,7 +110,7 @@ class RatraSerializers(serializers.ModelSerializer):
 class SupplierRatrasSerializers(serializers.ModelSerializer):
     class Meta:
         model = Rastra
-        fields = ['id', 'name', 'active']
+        fields = ['id', 'name', 'is_active']
 
     def validate(self, attrs):
         if attrs == '':

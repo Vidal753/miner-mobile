@@ -23,7 +23,7 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', disabl
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <ScrollView style={{ marginTop: 60 }}>
+        <ScrollView style={{ paddingTop: 100 }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <View>
