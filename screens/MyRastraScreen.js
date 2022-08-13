@@ -58,6 +58,7 @@ export default function ({ navigation, route }) {
         <EditRastraModal
           title={'Agregar Rastra'}
           alertTitle={'Se guardo correctamente su Rastra.'}
+          reload={(reload) => setRefreshing(reload)}
         />
       )}
     </View>

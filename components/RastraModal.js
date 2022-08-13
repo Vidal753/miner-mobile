@@ -7,12 +7,28 @@ import Text from './Text';
 import SimpleAlert from './SimpleAlert';
 import Separator from './Separator';
 import InputText from './InputText';
+import api from '../api/api';
 
-export default function ({ title = '', alertTitle = '', buttonTitle = '', disable = false }) {
+export default function ({ title = '', alertTitle = '', buttonTitle = '', reload }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [modalVisible, setModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
+
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [amount, setAmount] = useState('');
+  const [direction, setDirection] = useState('');
+  const [description, setDescription] = useState('');
+
+  const create_rastra = () => {
+    api.sendData(
+      'api/rastra/',
+      { name, price, amount, direction, description },
+      (data) => console.log(data),
+      (error) => console.log(error)
+    );
+  };
 
   return (
     <View>
@@ -37,13 +53,42 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', disabl
                 <Text title={title} />
                 <Separator width={80} />
               </View>
-              <InputText title={'Nombre'} placeholder={'Nombre de la Rastra'} type={2} />
+              <InputText
+                title={'Nombre'}
+                placeholder={'Nombre de la Rastra'}
+                type={2}
+                onChangeText={(text) => setName(text)}
+              />
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <InputText title={'Precio'} placeholder={'Precio'} type={4} />
-                <InputText title={'Capacidad'} placeholder={'Capacidad'} type={4} />
+                <InputText
+                  title={'Precio'}
+                  placeholder={'Precio'}
+                  type={4}
+                  value={price}
+                  onChangeText={(price) => setPrice(price)}
+                />
+                <InputText
+                  title={'Capacidad'}
+                  placeholder={'Capacidad'}
+                  type={4}
+                  value={amount}
+                  onChangeText={(amount) => setAmount(amount)}
+                />
               </View>
-              <InputText title={'Dirección'} placeholder={'Dirección de la Rastra'} type={3} />
-              <InputText title={'Descripción'} placeholder={'Descripción de la Rastra'} type={3} />
+              <InputText
+                title={'Dirección'}
+                placeholder={'Dirección de la Rastra'}
+                type={3}
+                value={direction}
+                onChangeText={(direction) => setDirection(direction)}
+              />
+              <InputText
+                title={'Descripción'}
+                placeholder={'Descripción de la Rastra'}
+                type={3}
+                value={description}
+                onChangeText={(description) => setDescription(description)}
+              />
               <SimpleAlert
                 description={alertTitle}
                 buttonTitle={'OK'}
@@ -56,7 +101,11 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', disabl
               <View style={{ alignItems: 'center' }}>
                 <Button
                   title={'Guardar'}
-                  onPress={() => setVisible(!visible)}
+                  onPress={() => {
+                    create_rastra();
+                    reload(true);
+                    setVisible(!visible);
+                  }}
                   fontSize={2.5}
                   size={10}
                 />

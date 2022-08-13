@@ -44,6 +44,7 @@ export default function ({
             info={''}
             placeholder={placeholder}
             containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
+            onChangeText={onChangeText}
           />
         </View>
       );
@@ -56,6 +57,7 @@ export default function ({
             placeholder={placeholder}
             maxLength={143}
             containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
+            onChangeText={onChangeText}
           />
         </View>
       );
@@ -68,6 +70,7 @@ export default function ({
             info={''}
             placeholder={placeholder}
             containerSimpleTextInput={{ width: wp(38), margin: 0, marginBottom: 18 }}
+            onChangeText={onChangeText}
           />
         </View>
       );
