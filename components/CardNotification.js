@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, Alert } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -9,29 +9,46 @@ import StatusActivity from './StatusActivity';
 import Button from './Button';
 import DefineText from './DefineText';
 import SimpleAlert from './SimpleAlert';
+import ModalDateTime from './ModalDateTime';
 import api from '../api/api';
 
-export default function ({ status = {}, reserve }) {
-  const { id } = status;
+export default function ({ status = {}, reserve, store }) {
   const color = { ...colors };
-  const [visible, setVisible] = useState(false);
+  const { id } = status;
+  const phone_number = `${status.phone_number.slice(0, 4)}-${status.phone_number.slice(4)}`;
   const user_name = `${status.user_name[0]} ${status.user_name[1]}`;
   const edit = status.state === 'Pendiente';
   const styles = makeStyle(color, edit);
+  const [visible, setVisible] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [state, setState] = useState(status.state);
+  const [action, setAction] = useState('');
 
-  function confirm_reservation() {
+  if (!store) {
+    useEffect(() => {
+      if (status.fin) {
+        let fin = status.fin.replace(/-/g, '');
+        const date = `${fin.slice(2, 4)}/${fin.slice(0, 2)}/${fin.slice(4)}`;
+
+        const finish_time = new Date(date);
+        const actual = new Date();
+
+        if (finish_time <= actual) {
+          setState('Finalizado');
+          setAlert(true);
+        }
+      }
+    }, []);
+  }
+
+  const changeStatusNotification = (state) => {
     api.updateData(
       'api/reservation/detail',
-      {
-        id,
-        finish: '2022-08-23',
-        state: 'Activa',
-        is_active: true,
-      },
+      { id, state, is_active: false },
       (data) => console.log(data),
       (error) => console.log(error)
     );
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -48,63 +65,90 @@ export default function ({ status = {}, reserve }) {
             <DefineText title={'Cantidad'} description={`${status.amount}T`} padding={4} />
             <DefineText title={'Total'} description={`${status.total}C$`} padding={4} />
           </View>
-          {status.finish !== null && (
-            <DefineText title={'Finaliza'} description={`${status.finish}`} padding={4} />
+          {status.fin !== null && (
+            <DefineText title={'Finaliza'} description={`${status.fin}`} padding={4} />
           )}
         </View>
-        {edit && (
+        {state === 'Pendiente' && (
           <View style={styles.buttonContainer}>
-            <Button
-              title={'Aceptar'}
-              register
-              container={{ height: 35 }}
-              size={8}
-              fontSize={2}
-              onPress={() => {
-                confirm_reservation();
-                reserve(true);
-              }}
-            />
+            <ModalDateTime id={id} reserve={reserve} active={(data) => setState(data)} />
             <Button
               title={'Cancelar'}
               container={{ height: 35 }}
               size={8}
               fontSize={2}
-              onPress={() => setVisible(true)}
+              onPress={() => {
+                setAction('Cancelado');
+                setVisible(true);
+              }}
             />
           </View>
         )}
       </View>
       <SimpleAlert
         description={
-          'Estas a punto de cancelar esta reservación. ¿Estas seguro de que quieres cancerlarla?'
+          action === 'Cancelado'
+            ? 'Estas a punto de cancelar esta reservación. ¿Estas seguro de que quieres cancelarla?'
+            : action === 'Finalizado' &&
+              'Estas a punto de finalizar esta reservación. Si ya termino de procesar el material, confirme la finalización'
         }
         error
         changeVisible={(visible) => {
           setVisible(visible);
         }}
         visible={visible}
+        onPress={() => {
+          changeStatusNotification(action);
+          reserve(true);
+        }}
+      />
+      <SimpleAlert
+        description={
+          'Hay reservaciones que ya estan en la fecha de finalización. \n\nSi ya termino de procesar todo el material ' +
+          'presione el boton de finalización para activar de nuevo la rastra.'
+        }
+        changeVisible={(visible) => {
+          setAlert(visible);
+        }}
+        information
+        visible={alert}
         onPress={() => {}}
+        buttonTitle={'Ok'}
       />
       <View style={styles.buttonArea}>
-        {edit ? (
+        {status.state !== 'Finalizado' && status.state !== 'Cancelado' && (
           <Button
-            title={'Llamar'}
-            register
+            title={
+              state === 'Pendiente'
+                ? 'Llamar'
+                : state === 'Activa'
+                ? 'Cancelar'
+                : state === 'Finalizado' && 'Finalizar'
+            }
+            register={state !== 'Activa'}
             container={{ height: 30, marginVertical: 0 }}
             size={8}
             fontSize={2}
-          />
-        ) : (
-          <Button
-            title={'Cancelar'}
-            container={{ height: 30, marginVertical: 0 }}
-            size={8}
-            fontSize={2}
-            onPress={() => setVisible(true)}
+            onPress={() => {
+              switch (state) {
+                case 'Pendiente':
+                  Alert.alert('Llamando');
+                  break;
+
+                case 'Activa':
+                  setAction('Cancelado');
+                  setVisible(true);
+                  break;
+
+                case 'Finalizado':
+                  setAction('Finalizado');
+                  setVisible(true);
+                  break;
+              }
+            }}
           />
         )}
-        <DefineText title={'Teléfono'} description={`${status.phone_number}`} />
+        <DefineText title={'Teléfono'} description={phone_number} />
       </View>
     </View>
   );

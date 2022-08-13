@@ -41,6 +41,17 @@ export default function ({ navigation }) {
             onPress={() => navigation.navigate('MyRatingScreen')}
           />
         )}
+        {type === 2 && (
+          <ProfileButton
+            title={'Mis Notificaciones'}
+            icon={'archive'}
+            onPress={() =>
+              navigation.navigate('NotificationScreen', {
+                store: true,
+              })
+            }
+          />
+        )}
         <ProfileButton
           title={'Mis Reservaciones'}
           icon={'file-tray'}

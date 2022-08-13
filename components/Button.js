@@ -16,7 +16,11 @@ export default function ({
   const styles = makeStyle(color, size, register, container, fontSize);
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} disabled={disabled}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      disabled={disabled}
+    >
       <Text style={styles.primaryText}>{title}</Text>
     </TouchableOpacity>
   );

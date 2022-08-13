@@ -7,6 +7,7 @@ import ReserveScreen from '../screens/ReserveScreen';
 import PersonalInformationScreen from '../screens/PersonalInformationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ItemScreen from '../screens/ItemScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,13 @@ export default function () {
         component={ReserveScreen}
         options={{
           title: 'MIS RESERVACIONES',
+        }}
+      />
+      <Stack.Screen
+        name={'NotificationScreen'}
+        component={NotificationScreen}
+        options={{
+          title: 'MIS NOTIFICACIONES',
         }}
       />
       <Stack.Screen

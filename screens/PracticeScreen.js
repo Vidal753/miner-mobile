@@ -7,9 +7,10 @@ import {
   StyleSheet,
   Easing,
   PanResponder,
+  Platform,
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { colors } from '../constant/colors';
-import Button from '../components/Button';
 
 function Funtion1() {
   const color = { ...colors };
@@ -199,19 +200,8 @@ function Function5() {
 const Pratica = () => {
   const styles = makeStyle();
   const [number, setNumber] = useState(0);
-  return (
-    <View style={styles.container}>
-      <View>
-        <Text>{number}</Text>
-        <Button
-          title={'+'}
-          onPress={() => {
-            setNumber(number + 1);
-          }}
-        />
-      </View>
-    </View>
-  );
+
+  return <View style={styles.container} />;
 };
 
 export default function () {
@@ -221,9 +211,9 @@ export default function () {
 const makeStyle = () => {
   return StyleSheet.create({
     container: {
+      paddingVertical: 100,
       justifyContent: 'center',
       alignItems: 'center',
-      flexDirection: 'row',
     },
   });
 };

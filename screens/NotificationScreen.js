@@ -41,11 +41,11 @@ export default function ({ route }) {
 
   if (route.params === undefined) {
     reservation = notifications.filter(
-      (notification) => notification.state !== 'Finalizado' && reservation.state !== 'Cancelado'
+      (notification) => notification.state !== 'Finalizado' && notification.state !== 'Cancelado'
     );
   } else {
     reservation = notifications.filter(
-      (notification) => notification.state !== 'Pendiente' && reservation.state !== 'Activa'
+      (notification) => notification.state !== 'Pendiente' && notification.state !== 'Activa'
     );
   }
 
@@ -59,6 +59,7 @@ export default function ({ route }) {
             key={index}
             status={value}
             reserve={(is_active) => setRefreshing(is_active)}
+            store={route.params}
           />
         ))}
       </View>

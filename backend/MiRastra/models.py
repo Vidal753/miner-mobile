@@ -130,3 +130,10 @@ class Reservation(models.Model):
 
     def phone_number(self):
         return self.user.phone_number
+
+    def fin(self):
+        fin = self.finish
+        if fin:
+            finish = fin.strftime("%d-%m-%Y")
+            return finish
+        return None

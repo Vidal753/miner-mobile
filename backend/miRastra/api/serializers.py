@@ -177,8 +177,8 @@ class RatingSerializers(serializers.ModelSerializer):
 class ReservationSerializers(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ['id', 'user', 'rastra', 'user_name', 'name', 'amount', 'finish', 'date', 'state', 'phone_number', 'total', 'is_active']
-        extra_kwargs = {'user': {'write_only': True, 'required': False}, 'rastra': {'write_only': True, 'required': False}}
+        fields = ['id', 'user', 'rastra', 'user_name', 'name', 'amount', 'fin', 'finish', 'date', 'state', 'phone_number', 'total', 'is_active']
+        extra_kwargs = {'user': {'write_only': True, 'required': False}, 'rastra': {'write_only': True, 'required': False}, 'finish': {'write_only': True}}
 
 
 

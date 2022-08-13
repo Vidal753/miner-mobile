@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, Image } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import { LOGIN } from '../reducer/auth';
@@ -13,7 +13,6 @@ import api from '../api/api';
 export default function ({ navigation }) {
   const dispatch = useDispatch();
   const color = { ...colors };
-  const user = useSelector((reducer) => reducer.auth.access);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const styles = makeStyle();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Modal } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
