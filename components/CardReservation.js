@@ -28,13 +28,13 @@ export default function ({ status = {}, onPress, update }) {
           <StatusActivity status={status} />
           <Text style={styles.primaryText}>{status.name}</Text>
           <DefineText title={'Cantidad'} description={`${status.amount}T`} />
-          {status.finish !== null && (
+          {status.fin !== null && (
             <DefineText title={'Finaliza'} description={`${status.finish}`} />
           )}
         </View>
       </View>
       <View style={styles.buttonArea}>
-        {status.state === 'Pendiente...' && (
+        {status.state === 'Pendiente' && (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <EditReservationModal update={update} id={status.id} />
             <Button

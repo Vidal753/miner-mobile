@@ -22,6 +22,7 @@ export default function ({ navigation }) {
       'api/login/',
       { username, password },
       (response) => {
+        console.log(response);
         dispatch({
           type: LOGIN,
           payload: {

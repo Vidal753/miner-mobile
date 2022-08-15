@@ -2,7 +2,7 @@ import axios from 'axios';
 import { LOGIN, REFRESH } from '../reducer/auth';
 import { store } from '../store';
 
-const host = '127.0.0.1:8000/';
+const host = '192.168.1.3:8000/';
 
 const refreshAccessToken = async function() {
     let response = await axios

@@ -34,8 +34,8 @@ export default function ({ id, active }) {
     <View>
       <Modal
         animationType="slide"
-        transparent
         visible={modalVisible}
+        transparent
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
@@ -96,16 +96,16 @@ export default function ({ id, active }) {
           'Esta rastra esta ocupada temporalmente, intente nuevamente cuando este disponible.'
         }
         buttonTitle={'OK'}
-        changeVisible={(visible) => {
-          setVisible(visible);
+        changeVisible={(information) => {
+          setInformation(information);
         }}
-        visible={visible}
+        visible={information}
         information
-        onPress={() => setVisible(!visible)}
+        onPress={() => setInformation(!visible)}
       />
       <Button
         title={'Reservar'}
-        onPress={() => (active ? setModalVisible(true) : setVisible(!information))}
+        onPress={() => (active ? setModalVisible(true) : setInformation(!information))}
       />
     </View>
   );

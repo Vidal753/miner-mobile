@@ -74,7 +74,8 @@ class UserSerializer(serializers.ModelSerializer):
         attrs['password'] = password1
         user = User(**attrs)
 
-        safe_params = ('email', 'username', 'first_name', 'last_name', 'phone_number', 'city', 'type', 'password')
+        safe_params = ('email', 'username', 'first_name',
+                       'last_name', 'phone_number', 'city', 'type', 'password')
 
         for attr in attrs.keys():
             if attr not in safe_params:
@@ -103,7 +104,8 @@ class RatraSerializers(serializers.ModelSerializer):
 
     def validate(self, attrs):
         if attrs == '':
-            raise serializers.ValidationError("Este campo no puede estar en blanco.")
+            raise serializers.ValidationError(
+                "Este campo no puede estar en blanco.")
         return attrs
 
 
@@ -114,7 +116,8 @@ class SupplierRatrasSerializers(serializers.ModelSerializer):
 
     def validate(self, attrs):
         if attrs == '':
-            raise serializers.ValidationError("Este campo no puede estar en blanco.")
+            raise serializers.ValidationError(
+                "Este campo no puede estar en blanco.")
         return attrs
 
 
@@ -123,11 +126,13 @@ class UserSerializers(serializers.ModelSerializer):
         model = User
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'city', 'amount_rastra',
                   'type']
-        extra_kwargs = {'city': {'required': False}, 'first_name': {'required': True}}
+        extra_kwargs = {'city': {'required': False},
+                        'first_name': {'required': True}}
 
     def validate(self, attrs):
         if attrs == '':
-            raise serializers.ValidationError("No se permite dejar el campo vacío")
+            raise serializers.ValidationError(
+                "No se permite dejar el campo vacío")
         return attrs
 
 
@@ -140,17 +145,20 @@ class CreateUserSerializers(serializers.ModelSerializer):
 
     def validate_first_name(self, value):
         if value == '':
-            raise serializers.ValidationError("Este campo no puede estar en blanco.")
+            raise serializers.ValidationError(
+                "Este campo no puede estar en blanco.")
         return value
 
     def validate_last_name(self, value):
         if value == '':
-            raise serializers.ValidationError("Este campo no puede estar en blanco.")
+            raise serializers.ValidationError(
+                "Este campo no puede estar en blanco.")
         return value
 
     def validate(self, attrs):
         if attrs == '':
-            raise serializers.ValidationError("No se permite dejar el campo vacío")
+            raise serializers.ValidationError(
+                "No se permite dejar el campo vacío")
         return attrs
 
     def create(self, validated_data):
@@ -177,8 +185,7 @@ class RatingSerializers(serializers.ModelSerializer):
 class ReservationSerializers(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ['id', 'user', 'rastra', 'user_name', 'name', 'amount', 'fin', 'finish', 'date', 'state', 'phone_number', 'total', 'is_active']
-        extra_kwargs = {'user': {'write_only': True, 'required': False}, 'rastra': {'write_only': True, 'required': False}, 'finish': {'write_only': True}}
-
-
-
+        fields = ['id', 'user', 'rastra', 'user_name', 'name', 'amount', 'fin',
+                  'finish', 'date', 'state', 'phone_number', 'total', 'is_active']
+        extra_kwargs = {'user': {'write_only': True, 'required': False}, 'rastra': {
+            'write_only': True, 'required': False}, 'finish': {'write_only': True}}

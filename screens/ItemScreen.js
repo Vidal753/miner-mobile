@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, StyleSheet, Image } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Image, Alert } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,7 +19,7 @@ import api from '../api/api';
 
 let active = false;
 
-export default function ({ route }) {
+export default function ({ route, navigation }) {
   const { supplier, id } = route.params;
   const color = { ...colors };
   const styles = makeStyle(color);
@@ -58,6 +58,17 @@ export default function ({ route }) {
       setTitle('Ver más');
     }
   }
+
+  const delete_rastra = () => {
+    api.deleteData(
+      'api/rastra/detail',
+      { id },
+      (data) => {
+        navigation.goBack();
+      },
+      (error) => Alert.alert(error)
+    );
+  };
 
   return (
     <View style={{ paddingBottom: 100, backgroundColor: color.background }}>
@@ -103,7 +114,7 @@ export default function ({ route }) {
               setVisible(visible);
             }}
             visible={visible}
-            onPress={() => {}}
+            onPress={delete_rastra}
           />
           {supplier ? (
             <View style={styles.buttonArea}>

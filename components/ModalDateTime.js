@@ -29,6 +29,7 @@ export default function ({ id, reserve, active }) {
   };
 
   const onChange = (event, selectedDate) => {
+    setShow(false);
     const currentDate = selectedDate || date;
     setDate(currentDate);
     let tempDate = new Date(currentDate);
