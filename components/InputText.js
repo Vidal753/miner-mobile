@@ -14,6 +14,8 @@ export default function ({
   placeholder = '',
   type = 1,
   value,
+  error = '',
+  info = '',
   onChangeText,
 }) {
   const color = { ...colors };
@@ -25,8 +27,8 @@ export default function ({
         <View>
           <Text title={title} type={SMALL} style={styles.text} />
           <TextInput
-            error={''}
-            info={''}
+            error={error}
+            info={info}
             securityEntry={security}
             placeholder={placeholder}
             containerSimpleTextInput={styles.textInput}
@@ -40,8 +42,8 @@ export default function ({
         <View>
           <Text title={title} type={2} style={{ fontSize: hp(2.5), paddingLeft: 15 }} />
           <TextInput
-            error={''}
-            info={''}
+            error={error}
+            info={info}
             placeholder={placeholder}
             containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
             onChangeText={onChangeText}
@@ -66,8 +68,8 @@ export default function ({
         <View>
           <Text title={title} type={2} style={{ fontSize: hp(2.5), paddingLeft: 15 }} />
           <TextInput
-            error={''}
-            info={''}
+            error={error}
+            info={info}
             placeholder={placeholder}
             containerSimpleTextInput={{ width: wp(38), margin: 0, marginBottom: 18 }}
             onChangeText={onChangeText}

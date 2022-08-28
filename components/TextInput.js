@@ -6,13 +6,14 @@ import {
 } from 'react-native-responsive-screen';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
+
 export default function (props) {
   const color = { ...colors };
   const styles = makeStyles(color, props);
   const error = { ...props.error };
   const typeError = Object.keys(error);
-
   const [securityEntry, setSecurityEntry] = useState(props.securityEntry || false);
+
   const renderSecurityText = () => {
     const onPress = () => setSecurityEntry(!securityEntry);
     return props.securityEntry ? (

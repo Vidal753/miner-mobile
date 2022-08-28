@@ -15,6 +15,7 @@ export default function ({ navigation }) {
   const color = { ...colors };
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState({});
   const styles = makeStyle();
 
   function login() {
@@ -33,6 +34,7 @@ export default function ({ navigation }) {
         });
       },
       (error) => {
+        setError(error);
         console.log(error);
       }
     );
@@ -56,14 +58,14 @@ export default function ({ navigation }) {
           <Separator width={75} />
         </View>
         <TextInput
-          error={''}
-          info={''}
+          error={error}
+          info={'username'}
           placeholder={'Nombre de Usario'}
           onChangeText={(text) => setUsername(text)}
         />
         <TextInput
-          error={''}
-          info={''}
+          error={error}
+          info={'password'}
           placeholder={'Contraseña'}
           securityEntry
           onChangeText={(text) => setPassword(text)}

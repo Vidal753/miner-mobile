@@ -8,7 +8,7 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
 
-export default function ({ choices = [] }) {
+export default function ({ choices = [], selection }) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [selected, setSelected] = useState('-------');
@@ -39,6 +39,7 @@ export default function ({ choices = [] }) {
                 style={styles.choice}
                 onPress={() => {
                   setSelected(value.choice_text);
+                  selection(value.choice_text);
                   bottomSheet.current.close();
                 }}>
                 <Text style={styles.textChoice}>{value.choice_text}</Text>
