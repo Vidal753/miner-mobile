@@ -14,6 +14,7 @@ import CardItem from '../components/CardItem';
 import { colors } from '../constant/colors';
 import TextInput from '../components/TextInput';
 import Text from '../components/Text';
+import Skeleton from '../components/Skeleton';
 import api from '../api/api';
 import { SET_RASTRAS } from '../reducer/rastra';
 
@@ -25,7 +26,7 @@ export default function ({ navigation }) {
   const [filterData, setFilterData] = useState(rastras);
   const active = filterData.filter((status) => status.is_active === true);
   const inactive = filterData.filter((status) => status.is_active === false);
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
 
   const [filterActive, setFilterActive] = useState(false);
   const leftValue = useState(new Animated.Value(500))[0];
@@ -138,32 +139,38 @@ export default function ({ navigation }) {
           />
         </TouchableOpacity>
       </View>
-      <ScrollView
-        style={styles.container}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-        {/* eslint-disable-next-line react/style-prop-object */}
-        <StatusBar style={'light'} />
+      {refreshing ? (
+        active.map((state, index) => <Skeleton key={index} />)
+      ) : (
+        <View>
+          <ScrollView
+            style={styles.container}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+            {/* eslint-disable-next-line react/style-prop-object */}
+            <StatusBar style={'light'} />
 
-        {active.map((state, index) => (
-          <CardItem
-            key={index}
-            status={state}
-            onPress={() => {
-              navigation.navigate('Item', { supplier: false, id: state.id });
-            }}
-          />
-        ))}
-        {inactive.map((state, index) => (
-          <CardItem
-            key={index}
-            status={state}
-            onPress={() => {
-              navigation.navigate('Item', { supplier: false, id: state.id });
-            }}
-          />
-        ))}
-        <View style={{ minHeight: 190 }} />
-      </ScrollView>
+            {active.map((state, index) => (
+              <CardItem
+                key={index}
+                status={state}
+                onPress={() => {
+                  navigation.navigate('Item', { supplier: false, id: state.id });
+                }}
+              />
+            ))}
+            {inactive.map((state, index) => (
+              <CardItem
+                key={index}
+                status={state}
+                onPress={() => {
+                  navigation.navigate('Item', { supplier: false, id: state.id });
+                }}
+              />
+            ))}
+            <View style={{ paddingBottom: 300 }} />
+          </ScrollView>
+        </View>
+      )}
     </View>
   );
 }

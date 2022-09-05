@@ -1,4 +1,3 @@
-import axios from 'axios';
 import consumer, { host } from './consumer';
 
 export default {
