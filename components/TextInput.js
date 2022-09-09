@@ -125,7 +125,7 @@ const makeStyles = function (colors, props) {
       color: 'red',
       fontFamily: 'gotham-medium',
       paddingHorizontal: 20,
-      width: wp(80),
+      width: props.small ? 160 : wp(80),
     },
   });
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, Alert } from 'react-native';
+import { View, StyleSheet, Text, Linking } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -23,6 +23,10 @@ export default function ({ status = {}, reserve, store }) {
   const [alert, setAlert] = useState(false);
   const [state, setState] = useState(status.state);
   const [action, setAction] = useState('');
+
+  const handleCallPress = async () => {
+    await Linking.openURL(`tel:${status.phone_number}`);
+  };
 
   if (!store) {
     useEffect(() => {
@@ -132,7 +136,7 @@ export default function ({ status = {}, reserve, store }) {
             onPress={() => {
               switch (state) {
                 case 'Pendiente':
-                  Alert.alert('Llamando');
+                  handleCallPress();
                   break;
 
                 case 'Activa':

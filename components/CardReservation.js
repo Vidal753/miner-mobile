@@ -28,9 +28,7 @@ export default function ({ status = {}, onPress, update }) {
           <StatusActivity status={status} />
           <Text style={styles.primaryText}>{status.name}</Text>
           <DefineText title={'Cantidad'} description={`${status.amount}T`} />
-          {status.fin !== null && (
-            <DefineText title={'Finaliza'} description={`${status.finish}`} />
-          )}
+          {status.fin !== null && <DefineText title={'Finaliza'} description={`${status.fin}`} />}
         </View>
       </View>
       <View style={styles.buttonArea}>

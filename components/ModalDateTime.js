@@ -17,15 +17,19 @@ export default function ({ id, reserve, active }) {
   const [text, setText] = useState('Presionar');
 
   const acceptNotification = () => {
-    api.updateData(
-      'api/reservation/detail',
-      { id, finish: text, state: 'Activa', is_active: true },
-      (data) => {
-        setModalVisible(false);
-        active('Activa');
-      },
-      (error) => Alert.alert(error)
-    );
+    if (date > new Date()) {
+      api.updateData(
+        'api/reservation/detail',
+        { id, finish: text, state: 'Activa', is_active: true },
+        (data) => {
+          setModalVisible(false);
+          active('Activa');
+        },
+        (error) => Alert.alert(error)
+      );
+    } else {
+      Alert.alert('Fecha Invalida', 'No se permite ingresar una fecha inferior a la actual.');
+    }
   };
 
   const onChange = (event, selectedDate) => {

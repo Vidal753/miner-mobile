@@ -30,7 +30,7 @@ export default function ({ navigation }) {
 
   const [filterActive, setFilterActive] = useState(false);
   const leftValue = useState(new Animated.Value(500))[0];
-  const value = useState(new Animated.Value(0))[0];
+  const rastra_label = useState(new Animated.Value(0))[0];
 
   function showSearchBar() {
     setFilterActive(!filterActive);
@@ -40,7 +40,7 @@ export default function ({ navigation }) {
         duration: 1000,
         useNativeDriver: true,
       }).start();
-      Animated.timing(value, {
+      Animated.timing(rastra_label, {
         toValue: -300,
         duration: 2000,
         useNativeDriver: false,
@@ -51,7 +51,7 @@ export default function ({ navigation }) {
         duration: 1000,
         useNativeDriver: true,
       }).start();
-      Animated.timing(value, {
+      Animated.timing(rastra_label, {
         toValue: 0,
         duration: 900,
         useNativeDriver: false,
@@ -107,7 +107,7 @@ export default function ({ navigation }) {
           style={[
             {
               width: 30,
-              transform: [{ translateX: value }],
+              transform: [{ translateX: rastra_label }],
             },
           ]}>
           <Text title={'RASTRAS'} type={2} style={{ color: color.background, width: 140 }} />
@@ -121,7 +121,7 @@ export default function ({ navigation }) {
           <TextInput
             error={''}
             info={''}
-            containerSimpleTextInput={{ width: 290, height: 40 }}
+            containerSimpleTextInput={{ width: 280, height: 40 }}
             placeholder={'Buscar'}
             onChangeText={(event) => {
               searchFilterFunction(event);

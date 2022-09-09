@@ -182,6 +182,7 @@ class RatingSerializers(serializers.ModelSerializer):
         fields = ['user', 'rastra', 'name', 'user_name', 'stars', 'comment']
 
 
+
 class ReservationSerializers(serializers.ModelSerializer):
     class Meta:
         model = Reservation

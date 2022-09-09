@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, StyleSheet, Image, Alert } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -95,9 +95,14 @@ export default function ({ route, navigation }) {
           <DefineText title={'Dirección'} description={``} />
           <Text style={styles.secondText}>{rastra.direction}</Text>
           <DefineText title={'Descripción'} description={``} />
-          <Text style={[styles.secondText, { paddingVertical: 0 }]}>
-            {description.length > size ? `${description.substring(0, size)}...` : description}
-          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              showText();
+            }}>
+            <Text style={[styles.secondText, { paddingVertical: 0 }]}>
+              {description.length > size ? `${description.substring(0, size)}...` : description}
+            </Text>
+          </TouchableOpacity>
           <TouchableText
             title={title}
             style={{ alignItems: 'flex-start', marginTop: 0, marginBottom: 0 }}
@@ -123,6 +128,8 @@ export default function ({ route, navigation }) {
                 alertTitle={'Se edito correctamente su Rastra.'}
                 buttonTitle={'Editar'}
                 disable
+                edit
+                id={id}
               />
               <Button title={'Eliminar'} onPress={() => setVisible(true)} />
             </View>

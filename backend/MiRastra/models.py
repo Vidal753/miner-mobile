@@ -73,7 +73,7 @@ class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True )
     rastra = models.ForeignKey(Rastra, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Rastra')
     stars = models.IntegerField(default=0, verbose_name='Stars')
-    comment = models.CharField(max_length=500, verbose_name='Comment')
+    comment = models.CharField(max_length=500, verbose_name='Comment', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Rating'

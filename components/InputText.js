@@ -17,6 +17,7 @@ export default function ({
   error = '',
   info = '',
   onChangeText,
+  small = false,
 }) {
   const color = { ...colors };
   const styles = makeStyle(color);
@@ -44,8 +45,9 @@ export default function ({
           <TextInput
             error={error}
             info={info}
+            value={value}
             placeholder={placeholder}
-            containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
+            containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 10 }}
             onChangeText={onChangeText}
           />
         </View>
@@ -55,10 +57,13 @@ export default function ({
         <View>
           <Text title={title} type={2} style={{ fontSize: hp(2.5), paddingLeft: 15 }} />
           <TextInput
+            error={error}
+            info={info}
             multiline
+            value={value}
             placeholder={placeholder}
             maxLength={143}
-            containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 18 }}
+            containerSimpleTextInput={{ width: wp(80), margin: 0, marginBottom: 10 }}
             onChangeText={onChangeText}
           />
         </View>
@@ -70,9 +75,11 @@ export default function ({
           <TextInput
             error={error}
             info={info}
+            value={value}
             placeholder={placeholder}
-            containerSimpleTextInput={{ width: wp(38), margin: 0, marginBottom: 18 }}
+            containerSimpleTextInput={{ width: wp(38), margin: 0, marginBottom: 10 }}
             onChangeText={onChangeText}
+            small={small}
           />
         </View>
       );

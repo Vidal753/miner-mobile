@@ -24,6 +24,7 @@ export default function ({ navigation }) {
   const [type, setType] = useState(1);
   const [city, setCity] = useState('');
   const styles = makeStyle();
+  const host = '192.168.1.14:8000/';
 
   const options = [
     {
@@ -35,10 +36,9 @@ export default function ({ navigation }) {
   ];
 
   const register = () => {
-    console.log(username);
     axios
       .request({
-        url: `http://192.168.1.3:8000/api/register/`,
+        url: `http://192.168.1.14:8000/api/register/`,
         method: 'POST',
         data: {
           username,
@@ -75,7 +75,7 @@ export default function ({ navigation }) {
           </View>
           <Text title={'REGISTRO'} type={SECONDARY} />
           <Separator width={60} />
-          <Switch options={options} selection={(selected) => setType(selected)} />
+          <Switch options={options} selection={(selected) => setType(selected[0])} />
           <InputText
             title={'Nombre de Usario'}
             placeholder={'Escriba el nombre de Usuario'}

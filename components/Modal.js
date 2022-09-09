@@ -16,16 +16,17 @@ export default function ({ id, active }) {
   const [information, setInformation] = useState(false);
   const [phone_number, setPhone_number] = useState('');
   const [amount, setAmount] = useState(0);
+  const [error, setError] = useState('');
 
   const makeReservation = () => {
     api.sendData(
       'api/reservation/',
       { rastra: id, amount, phone_number },
       (data) => {
-        console.log(data);
+        setVisible(!visible);
       },
       (error) => {
-        console.log(error);
+        setError(error);
       }
     );
   };
@@ -66,7 +67,7 @@ export default function ({ id, active }) {
               info={''}
               onChangeText={(number) => setPhone_number(number)}
               keyboardType={'phone-pad'}
-              placeholder={'5676-9999'}
+              placeholder={'0000-0000'}
               containerSimpleTextInput={{ width: 150 }}
               text={styles.textInputText}
             />
@@ -85,7 +86,6 @@ export default function ({ id, active }) {
               title={'Confirmar'}
               onPress={() => {
                 makeReservation();
-                setVisible(!visible);
               }}
             />
           </View>

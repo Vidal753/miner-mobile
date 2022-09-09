@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Modal, TouchableOpacity, ScrollView } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { colors } from '../constant/colors';
@@ -9,24 +9,56 @@ import Separator from './Separator';
 import InputText from './InputText';
 import api from '../api/api';
 
-export default function ({ title = '', alertTitle = '', buttonTitle = '', reload }) {
+export default function ({
+  title = '',
+  alertTitle = '',
+  buttonTitle = '',
+  reload,
+  edit = false,
+  id,
+}) {
   const color = { ...colors };
   const styles = makeStyle(color);
   const [modalVisible, setModalVisible] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [amount, setAmount] = useState('');
+  const [price, setPrice] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [direction, setDirection] = useState('');
   const [description, setDescription] = useState('');
+  const [error, setError] = useState('');
+
+  if (edit) {
+    api.sendData(
+      'api/rastra/detail',
+      { id },
+      (data) => {
+        setName(data.name);
+        setPrice(`${data.price}`);
+        setAmount(`${data.amount}`);
+        setDescription(data.description);
+        setDirection(data.direction);
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  const update_rastra = () => {
+    api.sendData(
+      'api/rastra/detail',
+      { id, name, price, description, direction },
+      (data) => console.log(data),
+      (error) => console.log(error)
+    );
+  };
 
   const create_rastra = () => {
     api.sendData(
       'api/rastra/',
       { name, price, amount, direction, description },
-      (data) => console.log(data),
-      (error) => console.log(error)
+      (data) => setVisible(!visible),
+      (error) => setError(error)
     );
   };
 
@@ -58,6 +90,9 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', reload
                 placeholder={'Nombre de la Rastra'}
                 type={2}
                 onChangeText={(text) => setName(text)}
+                error={error}
+                value={name}
+                info={'name'}
               />
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <InputText
@@ -66,6 +101,9 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', reload
                   type={4}
                   value={price}
                   onChangeText={(price) => setPrice(price)}
+                  error={error}
+                  info={'price'}
+                  small
                 />
                 <InputText
                   title={'Capacidad'}
@@ -73,6 +111,9 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', reload
                   type={4}
                   value={amount}
                   onChangeText={(amount) => setAmount(amount)}
+                  error={error}
+                  info={'amount'}
+                  small
                 />
               </View>
               <InputText
@@ -81,6 +122,8 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', reload
                 type={3}
                 value={direction}
                 onChangeText={(direction) => setDirection(direction)}
+                error={error}
+                info={'direction'}
               />
               <InputText
                 title={'Descripción'}
@@ -88,6 +131,8 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', reload
                 type={3}
                 value={description}
                 onChangeText={(description) => setDescription(description)}
+                error={error}
+                info={'description'}
               />
               <SimpleAlert
                 description={alertTitle}
@@ -102,9 +147,8 @@ export default function ({ title = '', alertTitle = '', buttonTitle = '', reload
                 <Button
                   title={'Guardar'}
                   onPress={() => {
-                    create_rastra();
+                    edit ? update_rastra() : create_rastra();
                     reload(true);
-                    setVisible(!visible);
                   }}
                   fontSize={2.5}
                   size={10}

@@ -23,7 +23,6 @@ export default function ({ navigation }) {
       'api/login/',
       { username, password },
       (response) => {
-        console.log(response);
         dispatch({
           type: LOGIN,
           payload: {
@@ -70,7 +69,7 @@ export default function ({ navigation }) {
           securityEntry
           onChangeText={(text) => setPassword(text)}
         />
-        <TouchableText title={'¿Olvidaste tu Contraseña?'} />
+        {/*<TouchableText title={'¿Olvidaste tu Contraseña?'} />*/}
         <View style={styles.buttonAlign}>
           <Button title={'Iniciar'} onPress={() => login()} />
           <Button
